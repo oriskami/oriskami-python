@@ -1,0 +1,17 @@
+/.eggs
+/build
+/dist
+/MANIFEST
+/ubivar.egg-info*
+.python-version
+*.pyc
+*.egg
+*.class
+
+# Unit test / coverage reports
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+htmlcov/
