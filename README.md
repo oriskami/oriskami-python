@@ -49,7 +49,7 @@ import ubivar
 
 ubivar.api_key = "9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=".
 
-# create event 
+# Create event 
 ubivar.Event.create(parameters = {
     "id"                          : "123"           # a unique id 
   , "email"                       : "abc@gmail.com"
@@ -101,11 +101,16 @@ ubivar.Event.create(parameters = {
   , "amount_cur"                  : "EUR"
 })
 
-# retrieve single event 
+# Retrieve single event 
 ubivar.Event.retrieve("123")
-ubivar.Event.retrieve("123", api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 
-# list events 
+# Update an event 
+ubivar.Event.update("123", parameters={"extra_is_verified": "true", "extra_is_graylisted": "false"}})
+
+# Delete an event 
+ubivar.Event.delete("123")
+
+# List events 
 ubivar.Event.list()
 ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ```
