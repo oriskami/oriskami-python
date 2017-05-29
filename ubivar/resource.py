@@ -414,39 +414,14 @@ class CreateableAPIResource(APIResource):
 class UpdateableAPIResource(APIResource):
 
     @classmethod
-    def update(cls, api_key=None, idempotency_key=None,
+    def update(cls, resource_id=None, api_key=None, idempotency_key=None,
                ubivar_account=None, **params):
-        print(cls)
         requestor           = api_requestor.APIRequestor(api_key, account=ubivar_account)
-        url                 = cls.class_url()
+        url                 = cls.class_url() +"/"+ resource_id
+        print(url)
         headers             = populate_headers(idempotency_key)
         response, api_key   = requestor.request('post', url, params, headers)
         return convert_to_ubivar_object(response, api_key, ubivar_account)
-
-    @classmethod
-    def _modify(cls, url, api_key=None, idempotency_key=None,
-                ubivar_account=None, **params):
-        requestor = api_requestor.APIRequestor(api_key, account=ubivar_account)
-        headers = populate_headers(idempotency_key)
-        response, api_key = requestor.request('post', url, params, headers)
-        return convert_to_ubivar_object(response, api_key, ubivar_account)
-
-    @classmethod
-    def modify(cls, sid, **params):
-        url = "%s/%s" % (cls.class_url(), urllib.parse.quote_plus(util.utf8(sid)))
-        return cls._modify(url, **params)
-
-    def save(self, idempotency_key=None):
-        updated_params = self.serialize(None)
-        headers = populate_headers(idempotency_key)
-
-        if updated_params:
-            self.refresh_from(self.request('post', self.instance_url(),
-                                           updated_params, headers))
-        else:
-            util.logger.debug("Trying to save already saved object %r", self)
-        return self
-
 
 class DeletableAPIResource(APIResource):
 
