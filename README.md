@@ -83,7 +83,6 @@ is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python)
 
 |               | Resource                | C | R | U | D | L    | Test Specs |
 |--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-------:|
-| **Settings**  | Me                      |   | [x](https://ubivar.com/docs/python#retrieve_your_information) | [`{}`](https://ubivar.com/docs/python#retrieve_your_information) |  | | |
 | **Data**      | Events                  | [`{}`](https://ubivar.com/docs/python#create_event)| [123](https://ubivar.com/docs/python#retrieve_event) | [`{}`](https://ubivar.com/docs/python#update_event) | [123](https://ubivar.com/docs/python#delete_event) | [`{}`](https://ubivar.com/docs/python#list_events) | | 
 |               | Labels                  | [`{}`](https://ubivar.com/docs/python#create_label)| [123](https://ubivar.com/docs/python#retrieve_label) | [`{}`](https://ubivar.com/docs/python#update_label) | [123](https://ubivar.com/docs/python#delete_label) | [`{}`](https://ubivar.com/docs/python#list_labels) | | 
 |               | Features                |   | [123](https://ubivar.com/docs/python#retrieve_feature) |  |  | [`{}`](https://ubivar.com/docs/python#list_features) | | 
