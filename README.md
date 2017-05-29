@@ -40,7 +40,7 @@ python setup.py install
 ## Usage
 
 The library needs to be configured with your API key which is available in [My
-Ubivar][https://my.ubivar.com]. Set `ubivar.api_key` to its value:
+Ubivar](https://my.ubivar.com). Set `ubivar.api_key` to its value:
 
 ```python
 import ubivar 
