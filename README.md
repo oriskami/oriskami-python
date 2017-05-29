@@ -40,7 +40,9 @@ python setup.py install
 ## Usage
 
 The library needs to be configured with your API key which is available in [My
-Ubivar](https://my.ubivar.com). Set `ubivar.api_key` to its value:
+Ubivar](https://my.ubivar.com). Set `ubivar.api_key` to its value or for apps
+that need to use multiple keys during the lifetime of a process, set a key
+per-request. 
 
 ```python
 import ubivar 
@@ -101,26 +103,12 @@ ubivar.Event.create(parameters = {
 
 # retrieve single event 
 ubivar.Event.retrieve("123")
+ubivar.Event.retrieve("123", api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 
 # list events 
 ubivar.Event.list()
-```
-
-### Per-request Configuration
-
-For apps that need to use multiple keys during the lifetime of a process, it's
-also possible to set a per-request key and/or account:
-
-``` python
-import ubivar 
-
-# list events 
 ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
-
-# retrieve single event 
-ubivar.Event.retrieve("123", api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ```
-
 ## Resources, actions, and arguments 
 Every resource is accessed via your `ubivar` instance and accepts an optional
 callback as the last argument. In the matrix below we list the resources
@@ -164,25 +152,6 @@ is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python)
 | `gte`         |         | `{"id":{"gte":10}}` | `id` greater than or equal    |
 | `lt`          |         | `{"id":{"lt":10}}`  | `id` less than                |
 | `lte`         |         | `{"id":{"lte":10}}` | `id` less than or equal       |
-
-
-### Configuring a Client
-
-The library can be configured to use `urlfetch`, `requests`, `pycurl`, or
-`urllib2` with `ubivar.default_http_client`:
-
-``` python
-client = ubivar.http_client.UrlFetchClient()
-client = ubivar.http_client.RequestsClient()
-client = ubivar.http_client.PycurlClient()
-client = ubivar.http_client.Urllib2Client()
-ubivar.default_http_client = client
-```
-
-Without a configured client, by default the library will attempt to load
-libraries in the order above (i.e. `urlfetch` is preferred with `urllib2` used
-as a last resort). We usually recommend that people use `requests`.
-
 
 ### Logging
 
