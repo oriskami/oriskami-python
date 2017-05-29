@@ -441,3 +441,81 @@ class Event(CreateableAPIResource, DeletableAPIResource,
     def class_name(cls):
         return 'event'
 
+class Label(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'label'
+
+class Feature(ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'feature'
+
+class LastId(ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'lastid'
+
+class Whitelist(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'whitelist'
+
+class Blacklist(UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'blacklist'
+
+class RulesCustom(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'rules_custom'
+
+class RulesBase(UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'rules_base'
+
+class RulesAI(UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'rules_ai'
+
+class DedicatedScorings(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'dedicated_scorings'
+
+class Email(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'email'
+
+class ECommerce(UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'e-commerce'
+
+class Slack(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'slack'
+
+class Sms(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'sms'
+
+class Webhook(CreateableAPIResource, DeletableAPIResource,
+            UpdateableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'webhook'
+

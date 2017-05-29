@@ -11,7 +11,7 @@
 api_key = None
 client_id = None
 api_base = 'https://api.ubivar.com'
-api_version = 'v0.8.2-beta' 
+api_version = 'v1.0.0' 
 verify_ssl_certs = True
 default_http_client = None
 app_info = None
@@ -22,7 +22,20 @@ log = None
 # Resource
 from ubivar.resource import (  # noqa
     Event
-    )
+  , Label
+  , Feature
+  , LastId
+  , Whitelist
+  , Blacklist
+  , RulesCustom
+  , RulesAI
+  , RulesBase
+  , DedicatedScorings
+  , Email
+  , Sms
+  , Webhook
+  , ECommerce
+  , Slack)
 
 # Webhooks
 from ubivar.webhook import Webhook, WebhookSignature  # noqa
