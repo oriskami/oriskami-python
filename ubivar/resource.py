@@ -404,14 +404,24 @@ class CreateableAPIResource(APIResource):
     @classmethod
     def create(cls, api_key=None, idempotency_key=None,
                ubivar_account=None, **params):
-        requestor = api_requestor.APIRequestor(api_key, account=ubivar_account)
-        url = cls.class_url()
-        headers = populate_headers(idempotency_key)
-        response, api_key = requestor.request('post', url, params, headers)
+        requestor           = api_requestor.APIRequestor(api_key, account=ubivar_account)
+        url                 = cls.class_url()
+        headers             = populate_headers(idempotency_key)
+        response, api_key   = requestor.request('post', url, params, headers)
         return convert_to_ubivar_object(response, api_key, ubivar_account)
 
 
 class UpdateableAPIResource(APIResource):
+
+    @classmethod
+    def update(cls, api_key=None, idempotency_key=None,
+               ubivar_account=None, **params):
+        print(cls)
+        requestor           = api_requestor.APIRequestor(api_key, account=ubivar_account)
+        url                 = cls.class_url()
+        headers             = populate_headers(idempotency_key)
+        response, api_key   = requestor.request('post', url, params, headers)
+        return convert_to_ubivar_object(response, api_key, ubivar_account)
 
     @classmethod
     def _modify(cls, url, api_key=None, idempotency_key=None,
