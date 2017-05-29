@@ -35,7 +35,7 @@ python setup.py install
 
 ### Requirements
 
-* Python 2.6+ or Python 3.3+ (PyPy supported)
+* Python Python 3.6+ (PyPy supported)
 
 ## Usage
 
