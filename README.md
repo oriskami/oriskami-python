@@ -96,7 +96,7 @@ is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python)
 | **Notifications** | Email | [`{}`](https://ubivar.com/docs/python#create_email)| [123](https://ubivar.com/docs/python#retrieve_email) | [`{}`](https://ubivar.com/docs/python#update_email) | [123](https://ubivar.com/docs/python#delete_email) | [`{}`](https://ubivar.com/docs/python#list_emails) | | 
 |                   | Sms   | [`{}`](https://ubivar.com/docs/python#create_sms)| [123](https://ubivar.com/docs/python#retrieve_sms) | [`{}`](https://ubivar.com/docs/python#update_sms) | [123](https://ubivar.com/docs/python#delete_sms) | [`{}`](https://ubivar.com/docs/python#list_sms) | | 
 |                   | Webhook | [`{}`](https://ubivar.com/docs/python#create_webhook)| [123](https://ubivar.com/docs/python#retrieve_webhook) | [`{}`](https://ubivar.com/docs/python#update_webhook) | [123](https://ubivar.com/docs/python#delete_webhook) | [`{}`](https://ubivar.com/docs/python#list_webhooks) | | 
-|                   | E-commerce |   | [123](https://ubivar.com/docs/python#retrieve_e-commerce) | [`{}`](https://ubivar.com/docs/python#update_e-commerce) |  | [`{}`](https://ubivar.com/docs/python#list_e-commerces) | | 
+|                   | E-commerce |   | [123](https://ubivar.com/docs/python#retrieve_e-commerce) | [`{}`](https://ubivar.com/docs/python#update_e-commerce) |  |  | | 
 |                   | Slack | [`{}`](https://ubivar.com/docs/python#create_slack)| [123](https://ubivar.com/docs/python#retrieve_slack) | [`{}`](https://ubivar.com/docs/python#update_slack) | [123](https://ubivar.com/docs/python#delete_slack) | [`{}`](https://ubivar.com/docs/python#list_slacks) | | 
 
 
