@@ -99,6 +99,7 @@ is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python)
 |                   | E-commerce |   | [123](https://ubivar.com/docs/python#retrieve_e-commerce) | [`{}`](https://ubivar.com/docs/python#update_e-commerce) |  | [`{}`](https://ubivar.com/docs/python#list_e-commerces) | | 
 |                   | Slack | [`{}`](https://ubivar.com/docs/python#create_slack)| [123](https://ubivar.com/docs/python#retrieve_slack) | [`{}`](https://ubivar.com/docs/python#update_slack) | [123](https://ubivar.com/docs/python#delete_slack) | [`{}`](https://ubivar.com/docs/python#list_slacks) | | 
 
+
 + *C*: Create
 + *R*: Retrieve
 + *U*: Update
