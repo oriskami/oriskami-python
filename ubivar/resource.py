@@ -7,21 +7,21 @@ from ubivar import api_requestor, error, util
 
 def convert_to_ubivar_object(resp, api_key):
     types = {
-        'event'             : Event
-    ,   'label'             : Label
-    ,   'feature'           : Feature
+        'events'            : Event
+    ,   'labels'            : Label
+    ,   'features'          : Feature
     ,   'last_id'           : LastId
-    ,   'whitelist'         : Whitelist
-    ,   'blacklist'         : Blacklist
+    ,   'whitelists'        : Whitelist
+    ,   'blacklists'        : Blacklist
     ,   'rules_custom'      : RulesCustom
     ,   'rules_base'        : RulesBase
     ,   'rules_ai'          : RulesAI
     ,   'dedicated_scorings': DedicatedScorings
-    ,   'email'             : Email
+    ,   'emails'            : Email
     ,   'sms'               : Sms
-    ,   'webhook'           : Webhook
-    ,   'e-commerce'        : ECommerce
+    ,   'ecommerce'         : ECommerce
     ,   'slack'             : Slack
+    ,   'webhooks'          : Webhook
     }
 
     if isinstance(resp, list):
@@ -47,13 +47,6 @@ def convert_array_to_dict(arr):
     else:
         return arr
 
-
-def populate_headers(idempotency_key):
-    if idempotency_key is not None:
-        return {"Idempotency-Key": idempotency_key}
-    return None
-
-
 def _compute_diff(current, previous):
     if isinstance(current, dict):
         previous = previous or {}
@@ -62,7 +55,6 @@ def _compute_diff(current, previous):
             diff[key] = ""
         return diff
     return current if current is not None else ""
-
 
 def _serialize_list(array, previous):
     array = array or []
@@ -78,16 +70,14 @@ def _serialize_list(array, previous):
 
     return params
 
-
 class UbivarObject(dict):
     def __init__(self, id=None, api_key=None, **params):
         super(UbivarObject, self).__init__()
 
-        self._unsaved_values = set()
-        self._transient_values = set()
-
-        self._retrieve_params = params
-        self._previous = None
+        self._unsaved_values    = set()
+        self._transient_values  = set()
+        self._retrieve_params   = params
+        self._previous          = None
 
         object.__setattr__(self, 'api_key', api_key)
 
@@ -125,10 +115,9 @@ class UbivarObject(dict):
     def __setitem__(self, k, v):
         if v == "":
             raise ValueError(
-                "You cannot set %s to an empty string. "
-                "We interpret empty strings as None in requests."
-                "You may set %s.%s = None to delete the property" % (
-                    k, str(self), k))
+                "You cannot set %s to an empty string. We interpret empty "
+                "strings as None in requests. You may set %s.%s = None "
+                "to delete the property" % ( k, str(self), k))
 
         super(UbivarObject, self).__setitem__(k, v)
 
@@ -277,8 +266,6 @@ class UbivarObject(dict):
 
         return copied
 
-
-
 class APIResource(UbivarObject):
 
     @classmethod
@@ -302,7 +289,7 @@ class APIResource(UbivarObject):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "/%ss" % (cls_name,)
+        return "/%s" % (cls_name,)
 
     def instance_url(self):
         id = self.get('id')
@@ -337,9 +324,8 @@ class ListObject(UbivarObject):
             params['starting_after'] = item_id
             page = self.list(**params)
 
-    def create(self, idempotency_key=None, **params):
-        headers = populate_headers(idempotency_key)
-        return self.request('post', self['url'], params, headers)
+    def create(self, **params):
+        return self.request('post', self['url'], params)
 
     def retrieve(self, id, **params):
         base = self.get('url')
@@ -351,7 +337,6 @@ class ListObject(UbivarObject):
 
     def __iter__(self):
         return getattr(self, 'data', []).__iter__()
-
 
 class SingletonAPIResource(APIResource):
 
@@ -367,7 +352,7 @@ class SingletonAPIResource(APIResource):
     def instance_url(self):
         return self.class_url()
 
-#
+#######################################################
 #
 # Classes of API operations
 #
@@ -380,25 +365,22 @@ class ListableAPIResource(APIResource):
 
     @classmethod
     def list(cls, api_key=None, **params):
-        requestor = api_requestor.APIRequestor(api_key,
-                                               api_base=cls.api_base())
-        url = cls.class_url()
-        response, api_key = requestor.request('get', url, params)
-        ubivar_object = convert_to_ubivar_object(response, api_key)
+        requestor           = api_requestor.APIRequestor(api_key, api_base=cls.api_base())
+        url                 = cls.class_url()
+        print(url)
+        response, api_key   = requestor.request('get', url, params)
+        ubivar_object       = convert_to_ubivar_object(response, api_key)
         ubivar_object._retrieve_params = params
         return ubivar_object
-
 
 class CreatableAPIResource(APIResource):
 
     @classmethod
-    def create(cls, api_key=None, idempotency_key=None, **params):
+    def create(cls, api_key=None, **params):
         requestor           = api_requestor.APIRequestor(api_key)
         url                 = cls.class_url()
-        headers             = populate_headers(idempotency_key)
-        response, api_key   = requestor.request('post', url, params, headers)
+        response, api_key   = requestor.request('post', url, params)
         return convert_to_ubivar_object(response, api_key)
-
 
 class UpdatableAPIResource(APIResource):
 
@@ -418,27 +400,25 @@ class DeletableAPIResource(APIResource):
         response, api_key   = requestor.request('delete', url)
         return convert_to_ubivar_object(response, api_key)
 
-#
+#####################################################
 #
 # API OBJECTS
 #
 # 
-class Event(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
+class Event(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'event'
+        return 'events'
 
-class Label(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
+class Label(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'label'
+        return 'labels'
 
 class Feature(ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'feature'
+        return 'features'
 
 class LastId(ListableAPIResource):
     @classmethod
@@ -449,15 +429,14 @@ class Whitelist(CreatableAPIResource, DeletableAPIResource,
             UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'whitelist'
+        return 'whitelists'
 
 class Blacklist(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'blacklist'
+        return 'blacklists'
 
-class RulesCustom(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
+class RulesCustom(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'rules_custom'
@@ -472,38 +451,35 @@ class RulesAI(UpdatableAPIResource, ListableAPIResource):
     def class_name(cls):
         return 'rules_ai'
 
-class DedicatedScorings(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
+class DedicatedScorings(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'dedicated_scorings'
 
-class Email(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
+class Email(CreatableAPIResource, DeletableAPIResource,   UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'email'
+        return 'emails'
 
 class ECommerce(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'e-commerce'
+        return 'ecommerce'
 
-class Slack(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
+class Webhook(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'webhooks'
+
+class Slack(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'slack'
 
-class Sms(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
+class Sms(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'sms'
 
-class Webhook(CreatableAPIResource, DeletableAPIResource,
-            UpdatableAPIResource, ListableAPIResource):
-    @classmethod
-    def class_name(cls):
-        return 'webhook'
+
 

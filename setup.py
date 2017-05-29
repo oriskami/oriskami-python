@@ -44,7 +44,7 @@ if sys.version_info < (3, 0):
 
 setup(name='ubivar',
     cmdclass={'build_py': build_py},
-    version='0.2',
+    version='0.3',
     description='Ubivar python bindings',
     author='Ubivar',
     author_email='support@ubivar.com',
