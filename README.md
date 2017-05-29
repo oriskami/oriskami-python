@@ -81,7 +81,7 @@ callback as the last argument. In the matrix below we list the resources
 (rows), the actions (columns) and the arguments (cells). The full documentation
 is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
 
-|               | Resource                | C | R | U | D | L    | Test Specs |
+|               | Resource                | C | R | U | D | L     | Test Specs |
 |--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-------:|
 | **Data**      | Events                  | [`{}`](https://ubivar.com/docs/python#create_event)| [123](https://ubivar.com/docs/python#retrieve_event) | [`{}`](https://ubivar.com/docs/python#update_event) | [123](https://ubivar.com/docs/python#delete_event) | [`{}`](https://ubivar.com/docs/python#list_events) | | 
 |               | Labels                  | [`{}`](https://ubivar.com/docs/python#create_label)| [123](https://ubivar.com/docs/python#retrieve_label) | [`{}`](https://ubivar.com/docs/python#update_label) | [123](https://ubivar.com/docs/python#delete_label) | [`{}`](https://ubivar.com/docs/python#list_labels) | | 
