@@ -61,13 +61,13 @@ from ubivar.version import VERSION  # noqa
 from ubivar.api_requestor import APIRequestor  # noqa
 from ubivar.resource import (  # noqa
     APIResource,
-    CreateableAPIResource,
-    DeletableAPIResource,
+    CreatableAPIResource,
+    DeletbleAPIResource,
     ListObject,
     ListableAPIResource,
     SingletonAPIResource,
     UbivarObject,
-    UpdateableAPIResource,
+    UpdatableAPIResource,
     convert_to_ubivar_object)
 from ubivar.util import json, logger  # noqa
 
