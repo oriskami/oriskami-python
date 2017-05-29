@@ -62,7 +62,7 @@ from ubivar.api_requestor import APIRequestor  # noqa
 from ubivar.resource import (  # noqa
     APIResource,
     CreatableAPIResource,
-    DeletbleAPIResource,
+    DeletableAPIResource,
     ListObject,
     ListableAPIResource,
     SingletonAPIResource,
