@@ -7,7 +7,21 @@ from ubivar import api_requestor, error, util
 
 def convert_to_ubivar_object(resp, api_key, account):
     types = {
-        'event': Event
+        'event'             : Event
+    ,   'label'             : Label
+    ,   'feature'           : Feature
+    ,   'last_id'           : LastId
+    ,   'whitelist'         : Whitelist
+    ,   'blacklist'         : Blacklist
+    ,   'rules_custom'      : RulesCustom
+    ,   'rules_base'        : RulesBase
+    ,   'rules_ai'          : RulesAI
+    ,   'dedicated_scorings': DedicatedScorings
+    ,   'email'             : Email
+    ,   'sms'               : Sms
+    ,   'webhook'           : Webhook
+    ,   'e-commerce'        : ECommerce
+    ,   'Slack'             : Slack
     }
 
     if isinstance(resp, list):
