@@ -291,7 +291,7 @@ class APIResource(UbivarObject):
             raise NotImplementedError(
                 'APIResource is an abstract class.  You should perform '
                 'actions on its subclasses (e.g. Charge, Customer)')
-        return str(urllib.quote_plus(cls.__name__.lower()))
+        return str(urllib.parse.quote_plus(cls.__name__.lower()))
 
     @classmethod
     def class_url(cls):
@@ -306,7 +306,7 @@ class APIResource(UbivarObject):
                 'has invalid ID: %r' % (type(self).__name__, id), 'id')
         id = util.utf8(id)
         base = self.class_url()
-        extn = urllib.quote_plus(id)
+        extn = urllib.parse.quote_plus(id)
         return "%s/%s" % (base, extn)
 
 
@@ -338,7 +338,7 @@ class ListObject(UbivarObject):
     def retrieve(self, id, **params):
         base = self.get('url')
         id = util.utf8(id)
-        extn = urllib.quote_plus(id)
+        extn = urllib.parse.quote_plus(id)
         url = "%s/%s" % (base, extn)
 
         return self.request('get', url, params)
@@ -409,7 +409,7 @@ class UpdateableAPIResource(APIResource):
 
     @classmethod
     def modify(cls, sid, **params):
-        url = "%s/%s" % (cls.class_url(), urllib.quote_plus(util.utf8(sid)))
+        url = "%s/%s" % (cls.class_url(), urllib.parse.quote_plus(util.utf8(sid)))
         return cls._modify(url, **params)
 
     def save(self, idempotency_key=None):
