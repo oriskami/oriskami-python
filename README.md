@@ -62,17 +62,10 @@ also possible to set a per-request key and/or account:
 import ubivar 
 
 # list events 
-ubivar.Event.list(
-api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=",
-ubivar_account="acct_..."
-)
+ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 
 # retrieve single charge
-ubivar.Event.retrieve(
-"123",
-api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=",
-ubivar_account="acct_..."
-)
+ubivar.Event.retrieve("123", api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ```
 
 ## Resources, actions, and arguments 
