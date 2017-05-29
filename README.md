@@ -64,7 +64,7 @@ import ubivar
 # list events 
 ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 
-# retrieve single charge
+# retrieve single event 
 ubivar.Event.retrieve("123", api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ```
 
