@@ -5,7 +5,7 @@ from copy import deepcopy
 from ubivar import api_requestor, error, util
 
 
-def convert_to_ubivar_object(resp, api_key, account=None):
+def convert_to_ubivar_object(resp, api_key):
     types = {
         'event'             : Event
     ,   'label'             : Label
@@ -25,7 +25,7 @@ def convert_to_ubivar_object(resp, api_key, account=None):
     }
 
     if isinstance(resp, list):
-        return [convert_to_ubivar_object(i, api_key, account) for i in resp]
+        return [convert_to_ubivar_object(i, api_key) for i in resp]
     elif isinstance(resp, dict) and not isinstance(resp, UbivarObject):
         resp = resp.copy()
         klass_name = resp.get('object')
@@ -33,7 +33,7 @@ def convert_to_ubivar_object(resp, api_key, account=None):
             klass = types.get(klass_name, UbivarObject)
         else:
             klass = UbivarObject
-        return klass.construct_from(resp, api_key, ubivar_account=account)
+        return klass.construct_from(resp, api_key)
     else:
         return resp
 
@@ -80,7 +80,7 @@ def _serialize_list(array, previous):
 
 
 class UbivarObject(dict):
-    def __init__(self, id=None, api_key=None, ubivar_account=None, **params):
+    def __init__(self, id=None, api_key=None, **params):
         super(UbivarObject, self).__init__()
 
         self._unsaved_values = set()
@@ -90,7 +90,6 @@ class UbivarObject(dict):
         self._previous = None
 
         object.__setattr__(self, 'api_key', api_key)
-        object.__setattr__(self, 'ubivar_account', ubivar_account)
 
         if id:
             self['id'] = id
@@ -162,18 +161,13 @@ class UbivarObject(dict):
             self._unsaved_values.remove(k)
 
     @classmethod
-    def construct_from(cls, values, key, ubivar_account=None):
-        instance = cls(values.get('id'), api_key=key,
-                       ubivar_account=ubivar_account)
-        instance.refresh_from(values, api_key=key,
-                              ubivar_account=ubivar_account)
+    def construct_from(cls, values, key):
+        instance = cls(values.get('id'), api_key=key)
+        instance.refresh_from(values, api_key=key)
         return instance
 
-    def refresh_from(self, values, api_key=None, partial=False,
-                     ubivar_account=None):
+    def refresh_from(self, values, api_key=None, partial=False):
         self.api_key = api_key or getattr(values, 'api_key', None)
-        self.ubivar_account = \
-            ubivar_account or getattr(values, 'ubivar_account', None)
 
         # Wipe old state before setting new.  This is useful for e.g.
         # updating a customer, where there is no persistent card
@@ -190,7 +184,7 @@ class UbivarObject(dict):
 
         for k, v in values.items():
             super(UbivarObject, self).__setitem__(
-                k, convert_to_ubivar_object(v, api_key, ubivar_account))
+                k, convert_to_ubivar_object(v, api_key))
 
         self._previous = values
 
@@ -202,11 +196,10 @@ class UbivarObject(dict):
         if params is None:
             params = self._retrieve_params
         requestor = api_requestor.APIRequestor(
-            key=self.api_key, api_base=self.api_base(),
-            account=self.ubivar_account)
+            key=self.api_key, api_base=self.api_base())
         response, api_key = requestor.request(method, url, params, headers)
 
-        return convert_to_ubivar_object(response, api_key, self.ubivar_account)
+        return convert_to_ubivar_object(response, api_key)
 
     def __repr__(self):
         ident_parts = [type(self).__name__]
@@ -257,8 +250,7 @@ class UbivarObject(dict):
     # if it was set to be set manually. Here we override the class' copy
     # arguments so that we can bypass these possible exceptions on __setitem__.
     def __copy__(self):
-        copied = UbivarObject(self.get('id'), self.api_key,
-                              ubivar_account=self.ubivar_account)
+        copied = UbivarObject(self.get('id'), self.api_key)
 
         copied._retrieve_params = self._retrieve_params
 
@@ -387,14 +379,12 @@ class ListableAPIResource(APIResource):
         return cls.list(*args, **params).auto_paging_iter()
 
     @classmethod
-    def list(cls, api_key=None, ubivar_account=None, **params):
+    def list(cls, api_key=None, **params):
         requestor = api_requestor.APIRequestor(api_key,
-                                               api_base=cls.api_base(),
-                                               account=ubivar_account)
+                                               api_base=cls.api_base())
         url = cls.class_url()
         response, api_key = requestor.request('get', url, params)
-        ubivar_object = convert_to_ubivar_object(response, api_key,
-                                                 ubivar_account)
+        ubivar_object = convert_to_ubivar_object(response, api_key)
         ubivar_object._retrieve_params = params
         return ubivar_object
 
@@ -402,13 +392,12 @@ class ListableAPIResource(APIResource):
 class CreatableAPIResource(APIResource):
 
     @classmethod
-    def create(cls, api_key=None, idempotency_key=None,
-               ubivar_account=None, **params):
-        requestor           = api_requestor.APIRequestor(api_key, account=ubivar_account)
+    def create(cls, api_key=None, idempotency_key=None, **params):
+        requestor           = api_requestor.APIRequestor(api_key)
         url                 = cls.class_url()
         headers             = populate_headers(idempotency_key)
         response, api_key   = requestor.request('post', url, params, headers)
-        return convert_to_ubivar_object(response, api_key, ubivar_account)
+        return convert_to_ubivar_object(response, api_key)
 
 
 class UpdatableAPIResource(APIResource):

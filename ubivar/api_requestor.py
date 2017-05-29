@@ -62,12 +62,10 @@ def _build_api_url(url, query):
 
 class APIRequestor(object):
 
-    def __init__(self, key=None, client=None, api_base=None, api_version=None,
-                 account=None):
+    def __init__(self, key=None, client=None, api_base=None, api_version=None):
         self.api_base = api_base or ubivar.api_base
         self.api_key = key
         self.api_version = api_version or ubivar.api_version
-        self.ubivar_account = account
 
         from ubivar import verify_ssl_certs as verify
 
@@ -152,15 +150,11 @@ class APIRequestor(object):
             'Authorization': 'Bearer %s' % (api_key,),
         }
 
-        if self.ubivar_account:
-            headers['Ubivar-Account'] = self.ubivar_account
-
         if method == 'post':
             headers['Content-Type'] = 'application/x-www-form-urlencoded'
 
         if self.api_version is not None:
             headers['Accept-version'] = self.api_version
-            # headers['Ubivar-Version'] = self.api_version
 
         return headers
 
