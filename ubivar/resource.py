@@ -399,7 +399,7 @@ class ListableAPIResource(APIResource):
         return ubivar_object
 
 
-class CreateableAPIResource(APIResource):
+class CreatableAPIResource(APIResource):
 
     @classmethod
     def create(cls, api_key=None, idempotency_key=None,
@@ -411,7 +411,7 @@ class CreateableAPIResource(APIResource):
         return convert_to_ubivar_object(response, api_key, ubivar_account)
 
 
-class UpdateableAPIResource(APIResource):
+class UpdatableAPIResource(APIResource):
 
     @classmethod
     def update(cls, resource_id=None, api_key=None, idempotency_key=None,
@@ -426,7 +426,8 @@ class UpdateableAPIResource(APIResource):
 class DeletableAPIResource(APIResource):
 
     def delete(self, **params):
-        self.refresh_from(self.request('delete', self.instance_url(), params))
+        self.request('delete', self.instance_url(), params)
+        # self.refresh_from(self.request('delete', self.instance_url(), params))
         return self
 
 #
@@ -434,14 +435,14 @@ class DeletableAPIResource(APIResource):
 # API OBJECTS
 #
 # 
-class Event(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class Event(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'event'
 
-class Label(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class Label(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'label'
@@ -456,64 +457,64 @@ class LastId(ListableAPIResource):
     def class_name(cls):
         return 'lastid'
 
-class Whitelist(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class Whitelist(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'whitelist'
 
-class Blacklist(UpdateableAPIResource, ListableAPIResource):
+class Blacklist(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'blacklist'
 
-class RulesCustom(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class RulesCustom(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'rules_custom'
 
-class RulesBase(UpdateableAPIResource, ListableAPIResource):
+class RulesBase(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'rules_base'
 
-class RulesAI(UpdateableAPIResource, ListableAPIResource):
+class RulesAI(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'rules_ai'
 
-class DedicatedScorings(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class DedicatedScorings(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'dedicated_scorings'
 
-class Email(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class Email(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'email'
 
-class ECommerce(UpdateableAPIResource, ListableAPIResource):
+class ECommerce(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'e-commerce'
 
-class Slack(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class Slack(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'slack'
 
-class Sms(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class Sms(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'sms'
 
-class Webhook(CreateableAPIResource, DeletableAPIResource,
-            UpdateableAPIResource, ListableAPIResource):
+class Webhook(CreatableAPIResource, DeletableAPIResource,
+            UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'webhook'
