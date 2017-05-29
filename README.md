@@ -75,6 +75,51 @@ ubivar_account="acct_..."
 )
 ```
 
+## Resources, actions, and arguments 
+Every resource is accessed via your `ubivar` instance and accepts an optional
+callback as the last argument. In the matrix below we list the resources
+(rows), the actions (columns) and the arguments (cells). The full documentation
+is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
+
+|               | Resource                | C | R | U | D | L    | Test Specs |
+|--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-------:|
+| **Settings**  | Me                      |   | [x](https://ubivar.com/docs/python#retrieve_your_information) | [`{}`](https://ubivar.com/docs/python#retrieve_your_information) |  | | |
+| **Data**      | Events                  | [`{}`](https://ubivar.com/docs/python#create_event)| [123](https://ubivar.com/docs/python#retrieve_event) | [`{}`](https://ubivar.com/docs/python#update_event) | [123](https://ubivar.com/docs/python#delete_event) | [`{}`](https://ubivar.com/docs/python#list_events) | | 
+|               | Labels                  | [`{}`](https://ubivar.com/docs/python#create_label)| [123](https://ubivar.com/docs/python#retrieve_label) | [`{}`](https://ubivar.com/docs/python#update_label) | [123](https://ubivar.com/docs/python#delete_label) | [`{}`](https://ubivar.com/docs/python#list_labels) | | 
+|               | Features                |   | [123](https://ubivar.com/docs/python#retrieve_feature) |  |  | [`{}`](https://ubivar.com/docs/python#list_features) | | 
+| **Filtering** | Whitelists              | [`{}`](https://ubivar.com/docs/python#create_whitelist)| [123](https://ubivar.com/docs/python#retrieve_whitelist) | [`{}`](https://ubivar.com/docs/python#update_whitelist) | [123](https://ubivar.com/docs/python#delete_whitelist) | [`{}`](https://ubivar.com/docs/python#list_whitelists) | | 
+|               | Blacklists              |   | [123](https://ubivar.com/docs/python#retrieve_blacklist) | [`{}`](https://ubivar.com/docs/python#update_blacklist) |  | [`{}`](https://ubivar.com/docs/python#list_blacklists) | | 
+|               | Custom rules            | [`{}`](https://ubivar.com/docs/python#create_rules_custom)| [123](https://ubivar.com/docs/python#retrieve_rules_custom) | [`{}`](https://ubivar.com/docs/python#update_rules_custom) | [123](https://ubivar.com/docs/python#delete_rules_custom) | [`{}`](https://ubivar.com/docs/python#list_rules_customs) | | 
+|               | Base rules              |   | [123](https://ubivar.com/docs/python#retrieve_rules_base) | [`{}`](https://ubivar.com/docs/python#update_rules_base) |  | [`{}`](https://ubivar.com/docs/python#list_rules_bases) | | 
+|               | AI rules                |   | [123](https://ubivar.com/docs/python#retrieve_rules_ai) | [`{}`](https://ubivar.com/docs/python#update_rules_ai) |  | [`{}`](https://ubivar.com/docs/python#list_rules_ais) | | 
+|               | Dedicated scoring       | [`{}`](https://ubivar.com/docs/python#create_dedicated_scorings)| [123](https://ubivar.com/docs/python#retrieve_dedicated_scorings) | [`{}`](https://ubivar.com/docs/python#update_dedicated_scorings) | [123](https://ubivar.com/docs/python#delete_dedicated_scorings) | [`{}`](https://ubivar.com/docs/python#list_dedicated_scoringss) | | 
+|               | Mutualized scoring      |   | [123](https://ubivar.com/docs/python#retrieve_mutualized_scorings) | [`{}`](https://ubivar.com/docs/python#update_mutualized_scorings) |  | [`{}`](https://ubivar.com/docs/python#list_mutualized_scoringss) | | 
+| **Notifications** | Email | [`{}`](https://ubivar.com/docs/python#create_email)| [123](https://ubivar.com/docs/python#retrieve_email) | [`{}`](https://ubivar.com/docs/python#update_email) | [123](https://ubivar.com/docs/python#delete_email) | [`{}`](https://ubivar.com/docs/python#list_emails) | | 
+|                   | Sms   | [`{}`](https://ubivar.com/docs/python#create_sms)| [123](https://ubivar.com/docs/python#retrieve_sms) | [`{}`](https://ubivar.com/docs/python#update_sms) | [123](https://ubivar.com/docs/python#delete_sms) | [`{}`](https://ubivar.com/docs/python#list_smss) | | 
+|                   | Webhook | [`{}`](https://ubivar.com/docs/python#create_webhook)| [123](https://ubivar.com/docs/python#retrieve_webhook) | [`{}`](https://ubivar.com/docs/python#update_webhook) | [123](https://ubivar.com/docs/python#delete_webhook) | [`{}`](https://ubivar.com/docs/python#list_webhooks) | | 
+|                   | E-commerce |   | [123](https://ubivar.com/docs/python#retrieve_e-commerce) | [`{}`](https://ubivar.com/docs/python#update_e-commerce) |  | [`{}`](https://ubivar.com/docs/python#list_e-commerces) | | 
+|                   | Slack | [`{}`](https://ubivar.com/docs/python#create_slack)| [123](https://ubivar.com/docs/python#retrieve_slack) | [`{}`](https://ubivar.com/docs/python#update_slack) | [123](https://ubivar.com/docs/python#delete_slack) | [`{}`](https://ubivar.com/docs/python#list_slacks) | | 
+
++ *C*: Create
++ *R*: Retrieve
++ *U*: Update
++ *D*: Delete
++ *L*: List
++ `{}`: JSON with query parameters
+
+## Filter parameters
+
+| Filter        | Default | Example             | Description                   |
+| ------------- |:-------:|:--------------------|:------------------------------|
+| `start_after` |         | `{"start_after":10}`| `id` after the one specified  |
+| `end_before`  |         | `{"end_before":10}` | `id` before the one specified |
+| `limit`       | `10`    | `{"limit":10}`      | At most `10` returned results |
+| `gt`          |         | `{"id":{"gt":10}}`  | `id` greater than 10          |
+| `gte`         |         | `{"id":{"gte":10}}` | `id` greater than or equal    |
+| `lt`          |         | `{"id":{"lt":10}}`  | `id` less than                |
+| `lte`         |         | `{"id":{"lte":10}}` | `id` less than or equal       |
+
+
 ### Configuring a Client
 
 The library can be configured to use `urlfetch`, `requests`, `pycurl`, or

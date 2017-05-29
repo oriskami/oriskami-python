@@ -1,4 +1,5 @@
 /.eggs
+/node_modules
 /build
 /dist
 /MANIFEST
