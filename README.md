@@ -49,7 +49,7 @@ ubivar.api_key = "9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=".
 
 # create event 
 ubivar.Event.create(parameters = {
-    "id"                          : "123" 
+    "id"                          : "123"           # a unique id 
   , "email"                       : "abc@gmail.com"
   , "names"                       : "M Abc"
   , "account_creation_time"       : "2017-05-17 21:50:00"
