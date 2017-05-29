@@ -5,7 +5,7 @@ from copy import deepcopy
 from ubivar import api_requestor, error, util
 
 
-def convert_to_ubivar_object(resp, api_key, account):
+def convert_to_ubivar_object(resp, api_key, account=None):
     types = {
         'event'             : Event
     ,   'label'             : Label
@@ -21,7 +21,7 @@ def convert_to_ubivar_object(resp, api_key, account):
     ,   'sms'               : Sms
     ,   'webhook'           : Webhook
     ,   'e-commerce'        : ECommerce
-    ,   'Slack'             : Slack
+    ,   'slack'             : Slack
     }
 
     if isinstance(resp, list):
@@ -414,21 +414,20 @@ class CreatableAPIResource(APIResource):
 class UpdatableAPIResource(APIResource):
 
     @classmethod
-    def update(cls, resource_id=None, api_key=None, idempotency_key=None,
-               ubivar_account=None, **params):
-        requestor           = api_requestor.APIRequestor(api_key, account=ubivar_account)
+    def update(cls, resource_id, api_key=None, **params):
+        requestor           = api_requestor.APIRequestor(api_key)
         url                 = cls.class_url() +"/"+ resource_id
-        print(url)
-        headers             = populate_headers(idempotency_key)
-        response, api_key   = requestor.request('post', url, params, headers)
-        return convert_to_ubivar_object(response, api_key, ubivar_account)
+        response, api_key   = requestor.request('post', url, params)
+        return convert_to_ubivar_object(response, api_key)
 
 class DeletableAPIResource(APIResource):
 
-    def delete(self, **params):
-        self.request('delete', self.instance_url(), params)
-        # self.refresh_from(self.request('delete', self.instance_url(), params))
-        return self
+    @classmethod
+    def delete(cls, resource_id, api_key=None):
+        requestor           = api_requestor.APIRequestor(api_key)
+        url                 = cls.class_url() +"/"+ resource_id
+        response, api_key   = requestor.request('delete', url)
+        return convert_to_ubivar_object(response, api_key)
 
 #
 #
