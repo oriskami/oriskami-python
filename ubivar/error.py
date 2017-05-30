@@ -1,5 +1,4 @@
 # Exceptions
-import sys
 
 
 class UbivarError(Exception):

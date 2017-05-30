@@ -1,5 +1,4 @@
 import urllib
-import warnings
 import sys
 from copy import deepcopy
 from ubivar import api_requestor, error, util
@@ -7,25 +6,25 @@ from ubivar import api_requestor, error, util
 
 def convert_to_ubivar_object(resp, api_key):
     types = {
-        'events'                : Event
-    ,   'event_labels'          : EventLabel
-    ,   'event_notifications'   : EventNotification 
-    ,   'event_queues'          : EventQueue
-    ,   'event_reviews'         : EventReview
-    ,   'event_last_id'         : LastId
-    ,   'event_features'        : EventFeature
-    ,   'filter_whitelists'     : Whitelist
-    ,   'filter_blacklists'     : Blacklist
-    ,   'filter_rules_custom'   : RulesCustom
-    ,   'filter_rules_base'     : RulesBase
-    ,   'filter_rules_ai'       : RulesAI
-    ,   'filter_scorings_dedicated': DedicatedScorings
-    ,   'notifier_emails'       : Email
-    ,   'notifier_sms'          : Sms
-    ,   'notifier_ecommerce'    : ECommerce
-    ,   'notifier_slack'        : Slack
-    ,   'notifier_webhooks'     : Webhook
-    }
+            'events': Event,
+            'event_labels': EventLabel,
+            'event_notifications': EventNotification,
+            'event_queues': EventQueue,
+            'event_reviews': EventReview,
+            'event_last_id': EventLastId,
+            'event_features': EventFeature,
+            'filter_whitelists': FilterWhitelist,
+            'filter_blacklists': FilterBlacklist,
+            'filter_rules_custom': FilterRulesCustom,
+            'filter_rules_base': FilterRulesBase,
+            'filter_rules_ai': FilterRulesAI,
+            'filter_scorings_dedicated': FilterScoringsDedicated,
+            'notifier_emails': NotifierEmail,
+            'notifier_sms': NotifierSms,
+            'notifier_ecommerce': NotifierECommerce,
+            'notifier_slack': NotifierSlack,
+            'notifier_webhooks': NotifierWebhook
+            }
 
     if isinstance(resp, list):
         return [convert_to_ubivar_object(i, api_key) for i in resp]
@@ -50,6 +49,7 @@ def convert_array_to_dict(arr):
     else:
         return arr
 
+
 def _compute_diff(current, previous):
     if isinstance(current, dict):
         previous = previous or {}
@@ -58,6 +58,7 @@ def _compute_diff(current, previous):
             diff[key] = ""
         return diff
     return current if current is not None else ""
+
 
 def _serialize_list(array, previous):
     array = array or []
@@ -73,14 +74,15 @@ def _serialize_list(array, previous):
 
     return params
 
+
 class UbivarObject(dict):
     def __init__(self, id=None, api_key=None, **params):
         super(UbivarObject, self).__init__()
 
-        self._unsaved_values    = set()
-        self._transient_values  = set()
-        self._retrieve_params   = params
-        self._previous          = None
+        self._unsaved_values = set()
+        self._transient_values = set()
+        self._retrieve_params = params
+        self._previous = None
 
         object.__setattr__(self, 'api_key', api_key)
 
@@ -117,10 +119,10 @@ class UbivarObject(dict):
 
     def __setitem__(self, k, v):
         if v == "":
-            raise ValueError(
-                "You cannot set %s to an empty string. We interpret empty "
-                "strings as None in requests. You may set %s.%s = None "
-                "to delete the property" % ( k, str(self), k))
+            raise ValueError("You cannot set %s to an empty string. We "
+                             "interpret empty strings as None in requests. You"
+                             "may set %s.%s = None to delete the property" %
+                             (k, str(self), k))
 
         super(UbivarObject, self).__setitem__(k, v)
 
@@ -269,6 +271,7 @@ class UbivarObject(dict):
 
         return copied
 
+
 class APIResource(UbivarObject):
 
     @classmethod
@@ -341,6 +344,7 @@ class ListObject(UbivarObject):
     def __iter__(self):
         return getattr(self, 'data', []).__iter__()
 
+
 class SingletonAPIResource(APIResource):
 
     @classmethod
@@ -355,11 +359,12 @@ class SingletonAPIResource(APIResource):
     def instance_url(self):
         return self.class_url()
 
+
 #######################################################
-#
-# Classes of API operations
-#
-#
+# CLASSES OF API OPERATIONS                           #
+#######################################################
+
+
 class ListableAPIResource(APIResource):
 
     @classmethod
@@ -368,132 +373,183 @@ class ListableAPIResource(APIResource):
 
     @classmethod
     def list(cls, api_key=None, **params):
-        requestor           = api_requestor.APIRequestor(api_key, api_base=cls.api_base())
-        url                 = cls.class_url()
-        response, api_key   = requestor.request('get', url, params)
-        ubivar_object       = convert_to_ubivar_object(response, api_key)
+        requestor = api_requestor.APIRequestor(api_key,
+                                               api_base=cls.api_base())
+        url = cls.class_url()
+        response, api_key = requestor.request('get', url, params)
+        ubivar_object = convert_to_ubivar_object(response, api_key)
         ubivar_object._retrieve_params = params
         return ubivar_object
+
 
 class CreatableAPIResource(APIResource):
 
     @classmethod
     def create(cls, api_key=None, **params):
-        requestor           = api_requestor.APIRequestor(api_key)
-        url                 = cls.class_url()
-        response, api_key   = requestor.request('post', url, params)
+        requestor = api_requestor.APIRequestor(api_key)
+        url = cls.class_url()
+        response, api_key = requestor.request('post', url, params)
         return convert_to_ubivar_object(response, api_key)
+
 
 class UpdatableAPIResource(APIResource):
 
     @classmethod
     def update(cls, resource_id, api_key=None, **params):
-        requestor           = api_requestor.APIRequestor(api_key)
-        url                 = cls.class_url() +"/"+ resource_id
-        response, api_key   = requestor.request('post', url, params)
+        requestor = api_requestor.APIRequestor(api_key)
+        url = cls.class_url() + "/" + resource_id
+        response, api_key = requestor.request('post', url, params)
         return convert_to_ubivar_object(response, api_key)
+
 
 class DeletableAPIResource(APIResource):
 
     @classmethod
     def delete(cls, resource_id, api_key=None):
-        requestor           = api_requestor.APIRequestor(api_key)
-        url                 = cls.class_url() +"/"+ resource_id
-        response, api_key   = requestor.request('delete', url)
+        requestor = api_requestor.APIRequestor(api_key)
+        url = cls.class_url() + "/" + resource_id
+        response, api_key = requestor.request('delete', url)
         return convert_to_ubivar_object(response, api_key)
 
 #####################################################
 #
 # API OBJECTS
 #
-# 
-class Event(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+#
+
+
+class Event(CreatableAPIResource, UpdatableAPIResource,
+            DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'events'
 
-class EventLabel(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class EventLabel(CreatableAPIResource, UpdatableAPIResource,
+                 DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'event_labels'
 
+
 class EventNotification(ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'event_notifications'
 
-class EventQueue(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class EventQueue(CreatableAPIResource, UpdatableAPIResource,
+                 DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'event_queues'
 
-class EventReview(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class EventReview(CreatableAPIResource, UpdatableAPIResource,
+                  DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'event_reviews'
 
+
 class EventLastId(ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'event_lastid'
 
-class EventFeatures(ListableAPIResource):
+
+class EventFeature(ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'event_features'
 
-class FilterWhitelist(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class FilterWhitelist(CreatableAPIResource, UpdatableAPIResource,
+                      DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'filter_whitelists'
 
+
 class FilterBlacklist(UpdatableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'filter_blacklists'
 
-class FilterRulesCustom(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class FilterRulesCustom(CreatableAPIResource, UpdatableAPIResource,
+                        DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'filter_rules_custom'
 
+
 class FilterRulesBase(UpdatableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'filter_rules_base'
 
+
 class FilterRulesAI(UpdatableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'filter_rules_ai'
 
-class FilterScoringsDedicated(UpdatableAPIResource, ListableAPIResource):
+
+class FilterScoringsDedicated(UpdatableAPIResource,
+                              ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'filter_scorings_dedicated'
 
-class NotifierEmail(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class NotifierEmail(CreatableAPIResource, UpdatableAPIResource,
+                    DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'notifier_emails'
 
+
 class NotifierECommerce(UpdatableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'notifier_ecommerce'
 
-class NotifierWebhook(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class NotifierWebhook(CreatableAPIResource, UpdatableAPIResource,
+                      DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'notifier_webhooks'
 
-class NotifierSlack(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class NotifierSlack(CreatableAPIResource, UpdatableAPIResource,
+                    DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'notifier_slack'
 
-class NotifierSms(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+
+class NotifierSms(CreatableAPIResource, UpdatableAPIResource,
+                  DeletableAPIResource, ListableAPIResource):
+
     @classmethod
     def class_name(cls):
         return 'notifier_sms'
-

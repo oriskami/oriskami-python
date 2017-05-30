@@ -11,7 +11,7 @@
 api_key = None
 client_id = None
 api_base = 'https://api.ubivar.com'
-api_version = 'v1.0.0' 
+api_version = 'v1.0.0'
 verify_ssl_certs = True
 default_http_client = None
 app_info = None
@@ -21,21 +21,24 @@ log = None
 
 # Resource
 from ubivar.resource import (  # noqa
-    Event
-  , Label
-  , Feature
-  , LastId
-  , Whitelist
-  , Blacklist
-  , RulesCustom
-  , RulesAI
-  , RulesBase
-  , DedicatedScorings
-  , Email
-  , Sms
-  , Webhook
-  , ECommerce
-  , Slack)
+  Event,
+  EventNotification,
+  EventLastId,
+  EventFeature,
+  EventLabel,
+  EventQueue,
+  EventReview,
+  FilterWhitelist,
+  FilterBlacklist,
+  FilterRulesCustom,
+  FilterRulesAI,
+  FilterRulesBase,
+  FilterScoringsDedicated,
+  NotifierEmail,
+  NotifierSms,
+  NotifierWebhook,
+  NotifierECommerce,
+  NotifierSlack)
 
 # Error imports.  Note that we may want to move these out of the root
 # namespace in the future and you should prefer to access them via
@@ -79,5 +82,5 @@ def set_app_info(name, version=None, url=None):
     app_info = {
         'name': name,
         'version': version,
-        'url': url,
+        'url': url
     }

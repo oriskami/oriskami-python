@@ -44,16 +44,16 @@ if sys.version_info < (3, 0):
 
 setup(name='ubivar',
     cmdclass={'build_py': build_py},
-    version='0.4',
+    version='0.4.1',
     description='Ubivar python bindings',
     author='Ubivar',
     author_email='support@ubivar.com',
     url='http://github.com/ubivar/ubivar-python',
-    packages=['ubivar'],#,'ubivar.test','ubivar.test.resources'],
+    packages=['ubivar','ubivar.test','ubivar.test.resources'],
     package_data={'ubivar': ['data/ca-certificates.crt']},
     install_requires=install_requires,
-    # test_suite='ubivar.test.all',
-    # tests_require=['unittest2', 'mock'],
+    test_suite='ubivar.test.all',
+    tests_require=['unittest2', 'mock'],
     use_2to3=True,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -70,5 +70,5 @@ setup(name='ubivar',
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: Implementation :: PyPy",
-        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: Software Development :: Libraries :: Python Modules"
     ])

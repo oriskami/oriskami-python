@@ -15,7 +15,6 @@ logger = logging.getLogger('ubivar')
 
 __all__ = [
     'StringIO',
-    'parse_qsl',
     'json',
     'utf8',
     'log_info',
@@ -29,12 +28,6 @@ try:
     import cStringIO as StringIO
 except ImportError:
     from io import StringIO
-
-try:
-    from urllib.parse import parse_sql
-except ImportError:
-    # Python < 2.6
-    from cgi import parse_qsl
 
 try:
     import json

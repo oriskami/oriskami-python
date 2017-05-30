@@ -4,7 +4,6 @@ import platform
 import time
 import urllib
 from urllib import parse
-import warnings
 
 import ubivar
 from ubivar import error, http_client, version, util
@@ -72,7 +71,6 @@ class APIRequestor(object):
         self._client = client or ubivar.default_http_client or \
             http_client.new_default_http_client(
                 verify_ssl_certs=verify)
-
 
     @classmethod
     def format_app_info(cls, info):
@@ -179,23 +177,15 @@ class APIRequestor(object):
 
         abs_url = '%s%s' % (self.api_base, url)
 
-        encoded_params = urllib.parse.urlencode(list(_api_encode(params or {})))
+        nonenc_api_params = list(_api_encode(params or {}))
+        encoded_params = urllib.parse.urlencode(nonenc_api_params)
 
         if method == 'get' or method == 'delete':
             if params:
                 abs_url = _build_api_url(abs_url, encoded_params)
             post_data = None
         elif method == 'post':
-            if supplied_headers is not None and \
-                    supplied_headers.get("Content-Type") == \
-                    "multipart/form-data":
-                generator = MultipartDataGenerator()
-                generator.add_params(params or {})
-                post_data = generator.get_post_data()
-                supplied_headers["Content-Type"] = \
-                    "multipart/form-data; boundary=%s" % (generator.boundary,)
-            else:
-                post_data = encoded_params
+            post_data = encoded_params
         else:
             raise error.APIConnectionError(
                 'Unrecognized HTTP method %r.  This may indicate a bug in the '
@@ -243,4 +233,3 @@ class APIRequestor(object):
             )
             self.handle_api_error(rbody, rcode, resp, rheaders)
         return resp
-
