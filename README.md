@@ -118,10 +118,9 @@ ubivar.FilterWhitelist.list()
 ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ```
 ## Resources, actions, and arguments 
-Every resource is accessed via your `ubivar` instance and accepts an optional
-callback as the last argument. In the matrix below we list the resources
-(rows), the actions (columns) and the arguments (cells). The full documentation
-is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
+Every resource is accessed via your `ubivar`. The following matrix list the
+resources (rows), the CRUD actions (columns) and the arguments (cells). The cell links
+point to the full documentation at [https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
 
 |               | Resource                | C | R | U | D | L     | Test Specs |
 |--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-------:|
