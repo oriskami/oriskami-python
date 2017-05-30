@@ -119,7 +119,7 @@ ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ```
 ## Resources, actions, and arguments 
 The following matrix list the resources (rows), the CRUD actions (columns) and
-the arguments (cells). The cell links point to the full documentation at
+the arguments (cells). The cell links point to the API documentation at
 [https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
 
 |               | Resource                | C | R | U | D | L     | Test Specs |
@@ -131,7 +131,6 @@ the arguments (cells). The cell links point to the full documentation at
 |               | EventLabels             | [`{}`](https://ubivar.com/docs/python#create_eventlabel)| [`123`](https://ubivar.com/docs/python#retrieve_eventlabel) | [`123, {}`](https://ubivar.com/docs/python#update_eventlabel) | [`123`](https://ubivar.com/docs/python#delete_eventlabel) | [`{}`](https://ubivar.com/docs/python#list_eventlabels) | | 
 |               | EventQueues             | [`{}`](https://ubivar.com/docs/python#create_eventqueue)| [`123`](https://ubivar.com/docs/python#retrieve_eventqueue) | [`123, {}`](https://ubivar.com/docs/python#update_eventqueue) | [`123`](https://ubivar.com/docs/python#delete_eventqueue) | [`{}`](https://ubivar.com/docs/python#list_eventqueues) | | 
 |               | EventReviews            | [`{}`](https://ubivar.com/docs/python#create_eventreview)| [`123`](https://ubivar.com/docs/python#retrieve_eventreview) | [`123, {}`](https://ubivar.com/docs/python#update_eventreview) | [`123`](https://ubivar.com/docs/python#delete_eventreview) | [`{}`](https://ubivar.com/docs/python#list_eventreviews) | | 
-|               | Last id                 |   |  |  |  | [`{}`](https://ubivar.com/docs/python#list_last_id) | | 
 | **Filters** | FilterWhitelists        | [`{}`](https://ubivar.com/docs/python#create_filterwhitelist)| [`123`](https://ubivar.com/docs/python#retrieve_filterwhitelist) | [`123, {}`](https://ubivar.com/docs/python#update_filterwhitelist) | [`123`](https://ubivar.com/docs/python#delete_filterwhitelist) | [`{}`](https://ubivar.com/docs/python#list_filterwhitelists) | | 
 |               | FilterBlacklists        |   | [`123`](https://ubivar.com/docs/python#retrieve_filterblacklist) | [`123, {}`](https://ubivar.com/docs/python#update_filterblacklist) |  | [`{}`](https://ubivar.com/docs/python#list_filterblacklists) | | 
 |               | FilterRulesCustoms      | [`{}`](https://ubivar.com/docs/python#create_filterrulescustom)| [`123`](https://ubivar.com/docs/python#retrieve_filterrulescustom) | [`123, {}`](https://ubivar.com/docs/python#update_filterrulescustom) | [`123`](https://ubivar.com/docs/python#delete_filterrulescustom) | [`{}`](https://ubivar.com/docs/python#list_filterrulescustoms) | | 
