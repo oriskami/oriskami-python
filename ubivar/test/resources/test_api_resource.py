@@ -1,7 +1,5 @@
 import ubivar
-from ubivar.test.helper import (
-    UbivarApiTestCase, MyResource, MySingleton
-)
+from ubivar.test.helper import (UbivarApiTestCase, MyResource, MySingleton)
 
 
 class APIResourceTests(UbivarApiTestCase):
