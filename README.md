@@ -101,17 +101,20 @@ ubivar.Event.create(parameters = {
   , "amount_cur"                  : "EUR"
 })
 
-# Retrieve single event 
+# Retrieve, Update, Delete, or List Events 
 ubivar.Event.retrieve("123")
-
-# Update an event 
 ubivar.Event.update("123", parameters={"extra_is_verified": "true", "extra_is_graylisted": "false"}})
-
-# Delete an event 
 ubivar.Event.delete("123")
-
-# List events 
 ubivar.Event.list()
+
+# Create, Retrieve, Update, Delete or List Whiteslits
+ubivar.Whitelist.create(description="Test", feature="email_domain", is_active="true", value="gmail.com")
+ubivar.Whitelist.retrieve("0")
+ubivar.Whitelist.update("0", description="Test", feature="email_domain", is_active="true", value="yahoo.com")
+ubivar.Whitelist.delete("123")
+ubivar.Whitelist.list()
+
+# Specify a different API key for each request
 ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ```
 ## Resources, actions, and arguments 

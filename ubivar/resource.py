@@ -367,7 +367,6 @@ class ListableAPIResource(APIResource):
     def list(cls, api_key=None, **params):
         requestor           = api_requestor.APIRequestor(api_key, api_base=cls.api_base())
         url                 = cls.class_url()
-        print(url)
         response, api_key   = requestor.request('get', url, params)
         ubivar_object       = convert_to_ubivar_object(response, api_key)
         ubivar_object._retrieve_params = params
