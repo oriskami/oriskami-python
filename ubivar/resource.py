@@ -409,20 +409,35 @@ class Event(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, Li
     def class_name(cls):
         return 'events'
 
-class Label(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+class EventLabel(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'labels'
+        return 'event_labels'
 
-class Feature(ListableAPIResource):
+class EventNotification(ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'features'
+        return 'event_notifications'
+
+class EventQueue(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'event_queues'
+
+class EventReview(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'event_reviews'
+
+class EventFeatures(ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'event_features'
 
 class LastId(ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'lastid'
+        return 'event_lastid'
 
 class Whitelist(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
