@@ -147,6 +147,7 @@ is available at [https://ubivar.com/docs/python](https://ubivar.com/docs/python)
 + *U*: Update
 + *D*: Delete
 + *L*: List
++ `123`: resource id 
 + `{}`: JSON with query parameters
 
 ## Filter parameters
