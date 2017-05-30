@@ -1,19 +1,29 @@
+language: python 
+python:
+  - "3.6"
+  #- "2.6"
+  #- "2.7"
+  #- "3.2"
+  #- "3.3"
+  #- "3.4"
+  #- "3.5"
+    #- "3.6-dev" # 3.6 development branch
+    #- "3.7-dev" # 3.7 development branch
+    #- "nightly" # currently points to 3.7-dev
+env: PYCURL_SSL_LIBRARY=gnutls
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install libcurl4-gnutls-dev librtmp-dev
+install:
+  - pip install pycurl flake8 --use-mirrors
+  - python setup.py install
+script:
+  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then flake8 ubivar; fi
+  - python -W always setup.py test
+cache: apt
+matrix:
+  allow_failures:
+    - python: pypy
 branches:
   only:
     - master
-language: python 
-python:
-  - "2.6"
-  - "2.7"
-  - "3.2"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "3.6"
-  - "3.6-dev" # 3.6 development branch
-  - "3.7-dev" # 3.7 development branch
-  - "nightly" # currently points to 3.7-dev
-# command to install dependencies
-# install: "pip install -r requirements.txt"
-# # command to run tests
-# script: pytest
