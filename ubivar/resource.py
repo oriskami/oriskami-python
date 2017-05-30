@@ -19,7 +19,7 @@ def convert_to_ubivar_object(resp, api_key):
     ,   'dedicated_scorings': DedicatedScorings
     ,   'emails'            : Email
     ,   'sms'               : Sms
-    ,   'ecommerce'         : ECommerce
+    ,   'e-commerce'         : ECommerce
     ,   'slack'             : Slack
     ,   'webhooks'          : Webhook
     }
@@ -463,7 +463,7 @@ class Email(CreatableAPIResource, DeletableAPIResource,   UpdatableAPIResource, 
 class ECommerce(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'ecommerce'
+        return 'e-commerce'
 
 class Webhook(CreatableAPIResource, DeletableAPIResource, UpdatableAPIResource, ListableAPIResource):
     @classmethod
