@@ -7,21 +7,24 @@ from ubivar import api_requestor, error, util
 
 def convert_to_ubivar_object(resp, api_key):
     types = {
-        'events'            : Event
-    ,   'labels'            : Label
-    ,   'features'          : Feature
-    ,   'last_id'           : LastId
-    ,   'whitelists'        : Whitelist
-    ,   'blacklists'        : Blacklist
-    ,   'rules_custom'      : RulesCustom
-    ,   'rules_base'        : RulesBase
-    ,   'rules_ai'          : RulesAI
-    ,   'dedicated_scorings': DedicatedScorings
-    ,   'emails'            : Email
-    ,   'sms'               : Sms
-    ,   'e-commerce'         : ECommerce
-    ,   'slack'             : Slack
-    ,   'webhooks'          : Webhook
+        'events'                : Event
+    ,   'event_labels'          : EventLabel
+    ,   'event_notifications'   : EventNotification 
+    ,   'event_queues'          : EventQueue
+    ,   'event_reviews'         : EventReview
+    ,   'event_last_id'         : LastId
+    ,   'event_features'        : EventFeature
+    ,   'filter_whitelists'     : Whitelist
+    ,   'filter_blacklists'     : Blacklist
+    ,   'filter_rules_custom'   : RulesCustom
+    ,   'filter_rules_base'     : RulesBase
+    ,   'filter_rules_ai'       : RulesAI
+    ,   'filter_scorings_dedicated': DedicatedScorings
+    ,   'notifier_emails'       : Email
+    ,   'notifier_sms'          : Sms
+    ,   'notifier_ecommerce'    : ECommerce
+    ,   'notifier_slack'        : Slack
+    ,   'notifier_webhooks'     : Webhook
     }
 
     if isinstance(resp, list):
@@ -429,70 +432,68 @@ class EventReview(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResour
     def class_name(cls):
         return 'event_reviews'
 
+class EventLastId(ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'event_lastid'
+
 class EventFeatures(ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'event_features'
 
-class LastId(ListableAPIResource):
+class FilterWhitelist(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'event_lastid'
+        return 'filter_whitelists'
 
-class Whitelist(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+class FilterBlacklist(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'whitelists'
+        return 'filter_blacklists'
 
-class Blacklist(UpdatableAPIResource, ListableAPIResource):
+class FilterRulesCustom(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'blacklists'
+        return 'filter_rules_custom'
 
-class RulesCustom(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+class FilterRulesBase(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'rules_custom'
+        return 'filter_rules_base'
 
-class RulesBase(UpdatableAPIResource, ListableAPIResource):
+class FilterRulesAI(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'rules_base'
+        return 'filter_rules_ai'
 
-class RulesAI(UpdatableAPIResource, ListableAPIResource):
+class FilterScoringsDedicated(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'rules_ai'
+        return 'filter_scorings_dedicated'
 
-class DedicatedScorings(UpdatableAPIResource, ListableAPIResource):
+class NotifierEmail(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'dedicated_scorings'
+        return 'notifier_emails'
 
-class Email(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+class NotifierECommerce(UpdatableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'emails'
+        return 'notifier_ecommerce'
 
-class ECommerce(UpdatableAPIResource, ListableAPIResource):
+class NotifierWebhook(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'e-commerce'
+        return 'notifier_webhooks'
 
-class Webhook(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+class NotifierSlack(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'webhooks'
+        return 'notifier_slack'
 
-class Slack(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
+class NotifierSms(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
     @classmethod
     def class_name(cls):
-        return 'slack'
-
-class Sms(CreatableAPIResource, UpdatableAPIResource, DeletableAPIResource, ListableAPIResource):
-    @classmethod
-    def class_name(cls):
-        return 'sms'
-
-
+        return 'notifier_sms'
 

@@ -108,11 +108,11 @@ ubivar.Event.delete("123")
 ubivar.Event.list()
 
 # Create, Retrieve, Update, Delete or List Whiteslits
-ubivar.Whitelist.create(description="Test", feature="email_domain", is_active="true", value="gmail.com")
-ubivar.Whitelist.retrieve("0")
-ubivar.Whitelist.update("0", description="Test", feature="email_domain", is_active="true", value="yahoo.com")
-ubivar.Whitelist.delete("123")
-ubivar.Whitelist.list()
+ubivar.FilterWhitelist.create(description="Test", feature="email_domain", is_active="true", value="gmail.com")
+ubivar.FilterWhitelist.retrieve("0")
+ubivar.FilterWhitelist.update("0", description="Test", feature="email_domain", is_active="true", value="yahoo.com")
+ubivar.FilterWhitelist.delete("123")
+ubivar.FilterWhitelist.list()
 
 # Specify a different API key for each request
 ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
