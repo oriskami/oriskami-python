@@ -23,13 +23,10 @@ class UbivarTestCase(unittest2.TestCase):
         for attr in self.RESTORE_ATTRIBUTES:
             self._ubivar_original_attributes[attr] = getattr(ubivar, attr)
 
-        api_base = os.environ.get('STRIPE_API_BASE')
+        api_base = os.environ.get('UBIVAR_API_BASE')
         if api_base:
             ubivar.api_base = api_base
-        ubivar.api_key = os.environ.get(
-            'STRIPE_API_KEY', 'tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I')
-        ubivar.api_version = os.environ.get(
-            'STRIPE_API_VERSION', '2017-04-06')
+        ubivar.api_key = os.environ.get('UBIVAR_TEST_TOKEN')
 
     def tearDown(self):
         super(UbivarTestCase, self).tearDown()

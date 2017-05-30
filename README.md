@@ -1,7 +1,7 @@
 # Ubivar python bindings 
 [![PyPI version](https://badge.fury.io/py/ubivar.svg)](https://badge.fury.io/py/ubivar)
 [![Build Status](https://travis-ci.org/ubivar/ubivar-python.png?branch=master)](https://travis-ci.org/ubivar/ubivar-python)
-[![Inline docs](http://inch-ci.org/github/ubivar/ubivar-python.svg?branch=master)](http://inch-ci.org/github/ubivar/ubivar-python)
+
  
 The Ubivar Python library provides convenient access to the Ubivar API from
 applications written in the Python language. It includes a pre-defined set of
