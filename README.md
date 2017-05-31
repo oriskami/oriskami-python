@@ -164,7 +164,28 @@ the arguments (cells). The cell links point to the API documentation at
 | `lt`          |         | `id = {"lt" : 10}`  | `id` less than                |
 | `lte`         |         | `id = {"lte": 10}`  | `id` less than or equal       |
 
-### Logging
+## Test
+
+Run all tests (modify -e according to your Python target):
+
+```python
+tox -e py36
+```
+
+Run a single test suite:
+
+```python
+tox -e py36 -- --test-suite ubivar.test.resources.test_events
+```
+
+Run the linter with:
+
+```python
+pip install flake8
+flake8 ubivar 
+```
+
+## Logging
 
 The library can be configured to emit logging that will give you better insight
 into what it's doing. The `info` logging level is usually most appropriate for
@@ -190,7 +211,9 @@ logging.basicConfig()
 logging.getLogger('ubivar').setLevel(logging.DEBUG)
 ```
 
-### [Issues and feature requests](https://github.com/ubivar/ubivar-python/issues)
+## Issues and feature requests
+
+They are located [here](https://github.com/ubivar/ubivar-python/issues).
 
 ## Author
 

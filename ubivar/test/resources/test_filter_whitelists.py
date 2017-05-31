@@ -7,6 +7,7 @@ class UbivarAPIResourcesTests(UbivarTestCase):
 
     def test_filter_whitelist_list(self):
         response = ubivar.FilterWhitelist.list()
+        print(response)
         self.assertTrue(hasattr(response.data, "__iter__"))
 
     def test_filter_blacklist_list(self):
