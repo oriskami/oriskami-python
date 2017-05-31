@@ -157,11 +157,12 @@ the arguments (cells). The cell links point to the API documentation at
 
 | Filter        | Default | Example             | Description                   |
 | ------------- |:-------:|:--------------------|:------------------------------|
-| `limit`       | `10`    | `{"limit":10}`      | At most `10` returned results |
-| `gt`          |         | `{"id":{"gt":10}}`  | `id` greater than 10          |
-| `gte`         |         | `{"id":{"gte":10}}` | `id` greater than or equal    |
-| `lt`          |         | `{"id":{"lt":10}}`  | `id` less than                |
-| `lte`         |         | `{"id":{"lte":10}}` | `id` less than or equal       |
+| `order`       | `id`    | `order = "-id"`     | Sort by decreasing id         |
+| `limit`       | `10`    | `limit = 10`        | At most `10` returned results |
+| `gt`          |         | `id = {"gt" : 10}`  | `id` greater than 10          |
+| `gte`         |         | `id = {"gte": 10}`  | `id` greater than or equal    |
+| `lt`          |         | `id = {"lt" : 10}`  | `id` less than                |
+| `lte`         |         | `id = {"lte": 10}`  | `id` less than or equal       |
 
 ### Logging
 
