@@ -124,8 +124,8 @@ the arguments (cells). The cell links point to the API documentation at
 [https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
 
 |               | Resource                | C | R | U | D | L     | Test Specs |
-|--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-------:|
-| **Settings**  | Auth, Credentials       | - | - | - | - | -     | [Tests](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_credentials.py) | 
+|--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-----------|
+| **Settings**  | Auth, Credentials       |   |   |   |   |       | [Tests](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_credentials.py) | 
 | **Data**      | Events                  | [`{}`](https://ubivar.com/docs/python#create_event)| [`123`](https://ubivar.com/docs/python#retrieve_event) | [`123, {}`](https://ubivar.com/docs/python#update_event) | [`123`](https://ubivar.com/docs/python#delete_event) | [`{}`](https://ubivar.com/docs/python#list_events) | [Events](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_events.py) | 
 |               | EventNotifications      |  | [`123`](https://ubivar.com/docs/python#retrieve_eventnotification) |  |  | [`{}`](https://ubivar.com/docs/python#list_eventnotifications) | | 
 |               | EventLastId             |  | [`123`](https://ubivar.com/docs/python#retrieve_eventlastid) |  |  | [`{}`](https://ubivar.com/docs/python#list_eventlastids) | | 
