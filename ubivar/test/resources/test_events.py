@@ -50,3 +50,13 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         self.assertTrue(len(response.data) == 2)
         self.assertTrue(response.data[0]['id'] == DUMMY_EVENT_1['id'])
         self.assertTrue(response.data[1]['id'] == DUMMY_EVENT_2['id'])
+
+    def test_event_list_filter_id_order(self):
+        response = ubivar.Event.list(order="-id")
+        self.assertTrue(len(response.data) == 3)
+        self.assertTrue(response.data[0]['id'] == DUMMY_EVENT_3['id'])
+
+    def test_event_list_filter_id_order(self):
+        response = ubivar.Event.list(order="id")
+        self.assertTrue(len(response.data) == 3)
+        self.assertTrue(response.data[0]['id'] == DUMMY_EVENT_1['id'])
