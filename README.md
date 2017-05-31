@@ -123,7 +123,7 @@ The following matrix list the resources (rows), the CRUD actions (columns) and
 the arguments (cells). The cell links point to the API documentation at
 [https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
 
-|               | Resource                | C | R | U | D | L     | Test Specs |
+|               | Resource                | C | R | U | D | L     | Functional tests |
 |--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-----------|
 | **Settings**  | Auth, Credentials       |   |   |   |   |       | [Tests](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_credentials.py) | 
 | **Data**      | Event                  | [`{}`](https://ubivar.com/docs/python#create_event)| [`123`](https://ubivar.com/docs/python#retrieve_event) | [`123, {}`](https://ubivar.com/docs/python#update_event) | [`123`](https://ubivar.com/docs/python#delete_event) | [`{}`](https://ubivar.com/docs/python#list_events) | [Events](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_events.py) | 
