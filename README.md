@@ -66,7 +66,7 @@ ubivar.Event.create(parameters = {
   , "invoice_address_street1"     : "1 Av. des Champs-Élysées"
   , "invoice_name"                : "M ABC"
   , "invoice_phone1"              : "0123456789"
-  , "invoice_phone2"              : null
+  , "invoice_phone2"              : None 
   , "transport_date"              : "2017-05-18 08:00:00"
   , "transport_type"              : "Delivery"
   , "transport_mode"              : "TNT"
