@@ -179,7 +179,7 @@ class UbivarTestCase(unittest2.TestCase):
         api_base = os.environ.get('UBIVAR_API_BASE')
         if api_base:
             ubivar.api_base = api_base
-        ubivar.api_key = os.environ.get('UBIVAR_TEST_TOKEN')
+        ubivar.api_key = os.environ.get('UBIVAR_TEST_TOKEN_PYTHON_1')
 
     def tearDown(self):
         super(UbivarTestCase, self).tearDown()

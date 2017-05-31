@@ -125,7 +125,8 @@ the arguments (cells). The cell links point to the API documentation at
 
 |               | Resource                | C | R | U | D | L     | Test Specs |
 |--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-------:|
-| **Event data**| Events                  | [`{}`](https://ubivar.com/docs/python#create_event)| [`123`](https://ubivar.com/docs/python#retrieve_event) | [`123, {}`](https://ubivar.com/docs/python#update_event) | [`123`](https://ubivar.com/docs/python#delete_event) | [`{}`](https://ubivar.com/docs/python#list_events) | [Tests](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_events.py) | 
+| **Settings**  | Auth, Credentials       | - | - | - | - | -     | [Tests](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_credentials.py) | 
+| **Data**      | Events                  | [`{}`](https://ubivar.com/docs/python#create_event)| [`123`](https://ubivar.com/docs/python#retrieve_event) | [`123, {}`](https://ubivar.com/docs/python#update_event) | [`123`](https://ubivar.com/docs/python#delete_event) | [`{}`](https://ubivar.com/docs/python#list_events) | [Events](https://github.com/ubivar/ubivar-python/blob/master/ubivar/test/resources/test_events.py) | 
 |               | EventNotifications      |  | [`123`](https://ubivar.com/docs/python#retrieve_eventnotification) |  |  | [`{}`](https://ubivar.com/docs/python#list_eventnotifications) | | 
 |               | EventLastId             |  | [`123`](https://ubivar.com/docs/python#retrieve_eventlastid) |  |  | [`{}`](https://ubivar.com/docs/python#list_eventlastids) | | 
 |               | EventFeatures           |  | [`123`](https://ubivar.com/docs/python#retrieve_eventfeature) |  |  | [`{}`](https://ubivar.com/docs/python#list_eventfeatures) | | 
