@@ -7,16 +7,19 @@ class UbivarAPIResourcesTests(UbivarTestCase):
 
     def test_event_create(self):
         response = ubivar.Event.create(parameters=DUMMY_EVENT_1)
-        self.assertTrue(response.id == DUMMY_EVENT_1['id'])
-        self.assertTrue(hasattr(response, "parameters"))
+        event = response.data[0]
+        self.assertTrue(hasattr(event, "parameters"))
+        self.assertTrue(event["id"] == DUMMY_EVENT_1["id"])
 
         response = ubivar.Event.create(parameters=DUMMY_EVENT_2)
-        self.assertTrue(response.id == DUMMY_EVENT_2['id'])
-        self.assertTrue(hasattr(response, "parameters"))
+        event = response.data[0]
+        self.assertTrue(hasattr(event, "parameters"))
+        self.assertTrue(event["id"] == DUMMY_EVENT_2["id"])
 
         response = ubivar.Event.create(parameters=DUMMY_EVENT_3)
-        self.assertTrue(response.id == DUMMY_EVENT_3['id'])
-        self.assertTrue(hasattr(response, "parameters"))
+        event = response.data[0]
+        self.assertTrue(hasattr(event, "parameters"))
+        self.assertTrue(event["id"] == DUMMY_EVENT_3["id"])
 
     def test_event_list(self):
         response = ubivar.Event.list()

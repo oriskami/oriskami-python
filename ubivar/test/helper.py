@@ -162,6 +162,13 @@ DUMMY_EVENT_3 = {
         , "amount_cur"                  : "EUR"
         }
 
+DUMMY_WHITELIST = {
+        "description": "DUMMY WHITELIST",
+        "feature": "email_domain",
+        "is_active": "true",
+        "value": "gmail.com"
+        }
+
 NOW = datetime.datetime.now()
 
 
