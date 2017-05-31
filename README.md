@@ -157,8 +157,6 @@ the arguments (cells). The cell links point to the API documentation at
 
 | Filter        | Default | Example             | Description                   |
 | ------------- |:-------:|:--------------------|:------------------------------|
-| `start_after` |         | `{"start_after":10}`| `id` after the one specified  |
-| `end_before`  |         | `{"end_before":10}` | `id` before the one specified |
 | `limit`       | `10`    | `{"limit":10}`      | At most `10` returned results |
 | `gt`          |         | `{"id":{"gt":10}}`  | `id` greater than 10          |
 | `gte`         |         | `{"id":{"gte":10}}` | `id` greater than or equal    |

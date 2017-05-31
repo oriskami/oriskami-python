@@ -111,6 +111,57 @@ DUMMY_EVENT_2 = {
         , "amount_cur"                  : "EUR"
         }
 
+DUMMY_EVENT_3 = {
+          "id"                          : "3"           # a unique id 
+        , "email"                       : "def@hotmail.com"
+        , "names"                       : "M Ghi"
+        , "account_creation_time"       : "2017-05-17 22:50:00"
+        , "account_id"                  : "20"
+        , "account_n_fulfilled"         : "1"
+        , "account_total_since_created" : "59.40"
+        , "account_total_cur"           : "EUR"
+        , "invoice_time"                : "2017-05-17 21:55:00"
+        , "invoice_address_country"     : "San Francisco, CA 94102"
+        , "invoice_address_place"       : "75008 Paris"
+        , "invoice_address_street1"     : "944 Market Street, 8th floor"
+        , "invoice_name"                : "M Def"
+        , "invoice_phone1"              : "+1 111-111-111"
+        , "invoice_phone2"              : None
+        , "transport_date"              : "2017-05-18 08:00:00"
+        , "transport_type"              : "Delivery"
+        , "transport_mode"              : "TNT"
+        , "transport_weight"            : "9.000"
+        , "transport_unit"              : "kg"
+        , "transport_cur"               : "EUR"
+        , "delivery_address_country"    : "United States"
+        , "delivery_address_place"      : "San Francisco, CA 94102"
+        , "delivery_address_street1"    : "944 Market Street, 8th floor"
+        , "delivery_name"               : "M Ghi"
+        , "delivery_phone1"             : "+1 111-111-111"
+        , "customer_ip_address"         : "4.5.6.7"
+        , "pmeth_origin"                : "USA"
+        , "pmeth_validity"              : "0221"
+        , "pmeth_brand"                 : "MC"
+        , "pmeth_bin"                   : "510000"
+        , "pmeth_3ds"                   : "-1"
+        , "cart_products"               : [ "Product ref #12345" ]
+        , "cart_details"                : [{
+            "name"                      : "Product ref #12345"
+            , "pu"                        : "10.00"
+            , "n"                         : "1"
+            , "amount"                    : "10.00"
+            , "cur"                       : "EUR" 
+            }]
+        , "cart_n"                      : "15000"
+        , "order_payment_accepted"      : "2017-05-17 22:00:00"
+        , "amount_pmeth"                : "GHI Payment Service Provider"
+        , "amount_discounts"            :  "0.00"
+        , "amount_products"             : "20.00"
+        , "amount_transport"            : "10.00"
+        , "amount_total"                : "30.00"
+        , "amount_cur"                  : "EUR"
+        }
+
 NOW = datetime.datetime.now()
 
 
