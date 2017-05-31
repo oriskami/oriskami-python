@@ -7,5 +7,4 @@ class UbivarAPIResourcesTests(UbivarTestCase):
 
     def test_event_notification_list(self):
         response = ubivar.EventNotification.list()
-        print(response)
         self.assertTrue(len(response.data) == 3)

@@ -461,7 +461,7 @@ class EventLastId(ListableAPIResource):
 
     @classmethod
     def class_name(cls):
-        return 'event_lastid'
+        return 'event_last_id'
 
 
 class EventFeature(ListableAPIResource):
