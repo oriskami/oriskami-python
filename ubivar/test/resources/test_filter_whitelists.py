@@ -5,10 +5,6 @@ from ubivar.test.helper import (UbivarTestCase)
 
 class UbivarAPIResourcesTests(UbivarTestCase):
 
-    def test_event_list(self):
-        response = ubivar.Event.list()
-        self.assertTrue(hasattr(response.data, "__iter__"))
-
     def test_filter_whitelist_list(self):
         response = ubivar.FilterWhitelist.list()
         self.assertTrue(hasattr(response.data, "__iter__"))
@@ -52,4 +48,5 @@ class UbivarAPIResourcesTests(UbivarTestCase):
     def test_notifier_slack_list(self):
         response = ubivar.NotifierSlack.list()
         self.assertTrue(hasattr(response.data, "__iter__"))
+
 
