@@ -121,7 +121,8 @@ ubivar.Event.list(api_key="9spB-ChM6J8NwMEEG ... WsJShd6lVQH7f6xz=")
 ## Resources, actions, and arguments 
 The following matrix list the resources (rows), the CRUD actions (columns) and
 the arguments (cells). The cell links point to the API documentation at
-[https://ubivar.com/docs/python](https://ubivar.com/docs/python). 
+[https://ubivar.com/docs/python](https://ubivar.com/docs/python) or to the
+functional tests on github. 
 
 |               | Resource                | C | R | U | D | L     | Functional tests |
 |--------------:| ----------------------- |:-:|:-:|:-:|:-:|:-----:|:-----------|
