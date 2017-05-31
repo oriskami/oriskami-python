@@ -1,7 +1,16 @@
 import os
 import ubivar
 import warnings
-from ubivar.test.helper import (UbivarTestCase, DUMMY_WHITELIST, NOW)
+from ubivar.test.helper import (UbivarTestCase, NOW)
+
+
+DUMMY_WHITELIST = {
+        "description": "DUMMY WHITELIST",
+        "feature": "email_domain",
+        "is_active": "true",
+        "value": "gmail.com"
+        }
+
 
 class UbivarAPIResourcesTests(UbivarTestCase):
 
