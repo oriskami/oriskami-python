@@ -28,10 +28,8 @@ class UbivarAPIResourcesTests(UbivarTestCase):
     def test_event_label_update(self):
         eventId = "1"
         response = ubivar.EventLabel.update(eventId, label="is_loss", value="false")
-        print(response)
+        self.assertEqual(response.data[0].id, eventId)
+        self.assertFalse(response.data[0].labels.is_loss)
         response = ubivar.EventLabel.update(eventId, label="is_loss", value="true")
-        print(response)
-        response = ubivar.EventLabel.update(eventId, label="another_label", value="false")
-        print(response)
-        self.assertTrue(True)
+        self.assertTrue(response.data[0].labels.is_loss)
 
