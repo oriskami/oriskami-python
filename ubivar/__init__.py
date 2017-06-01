@@ -24,7 +24,6 @@ from ubivar.resource import (  # noqa
   Event,
   EventNotification,
   EventLastId,
-  EventFeature,
   EventLabel,
   EventQueue,
   EventReview,

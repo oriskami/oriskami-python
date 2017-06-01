@@ -12,7 +12,6 @@ def convert_to_ubivar_object(resp, api_key):
             'event_queues': EventQueue,
             'event_reviews': EventReview,
             'event_last_id': EventLastId,
-            'event_features': EventFeature,
             'filter_whitelists': FilterWhitelist,
             'filter_blacklists': FilterBlacklist,
             'filter_rules_custom': FilterRulesCustom,
@@ -405,10 +404,10 @@ class UpdatableAPIResource(APIResource):
 class DeletableAPIResource(APIResource):
 
     @classmethod
-    def delete(cls, resource_id, api_key=None):
+    def delete(cls, resource_id, api_key=None, **params):
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + "/" + resource_id
-        response, api_key = requestor.request('delete', url)
+        response, api_key = requestor.request('delete', url, params)
         return convert_to_ubivar_object(response, api_key)
 
 #####################################################
@@ -426,8 +425,8 @@ class Event(CreatableAPIResource, UpdatableAPIResource,
         return 'events'
 
 
-class EventLabel(CreatableAPIResource, UpdatableAPIResource,
-                 DeletableAPIResource, ListableAPIResource):
+class EventLabel(UpdatableAPIResource, DeletableAPIResource, 
+                 ListableAPIResource):
 
     @classmethod
     def class_name(cls):
@@ -441,16 +440,16 @@ class EventNotification(ListableAPIResource):
         return 'event_notifications'
 
 
-class EventQueue(CreatableAPIResource, UpdatableAPIResource,
-                 DeletableAPIResource, ListableAPIResource):
+class EventQueue(UpdatableAPIResource, DeletableAPIResource, 
+                 ListableAPIResource):
 
     @classmethod
     def class_name(cls):
         return 'event_queues'
 
 
-class EventReview(CreatableAPIResource, UpdatableAPIResource,
-                  DeletableAPIResource, ListableAPIResource):
+class EventReview(UpdatableAPIResource, DeletableAPIResource, 
+                  ListableAPIResource):
 
     @classmethod
     def class_name(cls):
@@ -462,13 +461,6 @@ class EventLastId(ListableAPIResource):
     @classmethod
     def class_name(cls):
         return 'event_last_id'
-
-
-class EventFeature(ListableAPIResource):
-
-    @classmethod
-    def class_name(cls):
-        return 'event_features'
 
 
 class FilterWhitelist(CreatableAPIResource, UpdatableAPIResource,
