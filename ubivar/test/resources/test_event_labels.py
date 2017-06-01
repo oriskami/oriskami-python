@@ -8,18 +8,17 @@ class UbivarAPIResourcesTests(UbivarTestCase):
     def test_event_label_list(self):
         response = ubivar.EventLabel.list()
         self.assertTrue(len(response.data) == 3)
-        print(response)
 
     def test_event_label_retrieve(self):
         response = ubivar.EventLabel.retrieve("1")
         event = response.data[0]
         self.assertEqual(event["id"], "1")
-        self.assertEqual(event["labels"], True)
+        self.assertEqual(event["labels"], "true")
 
         response = ubivar.EventLabel.retrieve("2")
         event = response.data[0]
         self.assertEqual(event["id"], "2")
-        self.assertEqual(event["labels"], False)
+        self.assertEqual(event["labels"], "false")
 
         response = ubivar.EventLabel.retrieve("3")
         event = response.data[0]
@@ -30,9 +29,9 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         eventId = "1"
         response = ubivar.EventLabel.update(eventId, label="is_loss", value="false")
         self.assertEqual(response.data[0].id, eventId)
-        self.assertFalse(response.data[0].labels.is_loss)
+        self.assertEqual(response.data[0].labels.is_loss, "false")
         response = ubivar.EventLabel.update(eventId, label="is_loss", value="true")
-        self.assertTrue(response.data[0].labels.is_loss)
+        self.assertEqual(response.data[0].labels.is_loss, "true")
 
     def test_event_label_delete(self):
         eventId = "1"
@@ -40,3 +39,4 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         print(response)
         self.assertTrue(True)
         ubivar.EventLabel.update(eventId, label="is_loss", value="true")
+        print(response)
