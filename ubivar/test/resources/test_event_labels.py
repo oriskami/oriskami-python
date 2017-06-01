@@ -8,6 +8,7 @@ class UbivarAPIResourcesTests(UbivarTestCase):
     def test_event_label_list(self):
         response = ubivar.EventLabel.list()
         self.assertTrue(len(response.data) == 3)
+        print(response)
 
     def test_event_label_retrieve(self):
         response = ubivar.EventLabel.retrieve("1")
@@ -33,3 +34,9 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         response = ubivar.EventLabel.update(eventId, label="is_loss", value="true")
         self.assertTrue(response.data[0].labels.is_loss)
 
+    def test_event_label_delete(self):
+        eventId = "1"
+        response = ubivar.EventLabel.delete(eventId, label="is_loss")
+        print(response)
+        self.assertTrue(True)
+        ubivar.EventLabel.update(eventId, label="is_loss", value="true")
