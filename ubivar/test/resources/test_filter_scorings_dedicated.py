@@ -4,7 +4,7 @@ import warnings
 from ubivar.test.helper import (UbivarTestCase)
 
 DUMMY_DEDICATED_SCORINGS = {
-        "score_id": "123",
+        "score_id": "124",
         "is_active": "false"
         }
 
@@ -26,7 +26,7 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         self.assertEqual(filterScoringsDedicated["score_id"] , DUMMY_DEDICATED_SCORINGS["score_id"])
         self.assertEqual(filterScoringsDedicated["is_active"], DUMMY_DEDICATED_SCORINGS["is_active"])
 
-        response = ubivar.FilterScoringsDedicated.update("0", is_active="true")
+        response = ubivar.FilterScoringsDedicated.update("0", is_active="true", score_id="123")
         filterScoringsDedicated = response.data[0]
         self.assertEqual(filterScoringsDedicated["is_active"]   , "true")
         self.assertEqual(response.object, "filter_scorings_dedicated")

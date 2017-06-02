@@ -6,9 +6,8 @@ from ubivar.test.helper import (UbivarTestCase, NOW)
 
 DUMMY_SMS = {
         "description": "DUMMY SMS",
-        "feature": "sms_domain",
-        "is_active": "true",
-        "value": "abc@gmail.com"
+        "value": "+1 123 123 123",
+        "is_active": "true"
         }
 
 
@@ -19,10 +18,15 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         notifierSms = response.data[len(response.data)-1]
         self.assertTrue(hasattr(response, "data"))
         self.assertEqual(notifierSms["description"], DUMMY_SMS["description"])
-        self.assertEqual(notifierSms["feature"]    , DUMMY_SMS["feature"])
         self.assertEqual(notifierSms["value"]      , DUMMY_SMS["value"])
         self.assertEqual(notifierSms["is_active"]  , DUMMY_SMS["is_active"])
         self.assertEqual(response.object, "notifier_sms")
+
+    def test_notifier_sms_retrieve(self):
+        response = ubivar.NotifierSms.retrieve("0")
+        self.assertTrue(hasattr(response.data, "__iter__"))
+        self.assertTrue(response.object == "notifier_sms")
+        self.assertTrue(len(response.data))
 
     def test_notifier_sms_list(self):
         response = ubivar.NotifierSms.list()
@@ -39,15 +43,12 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         newDescription = "new description"
         newValue = "new value"
         newStatus= "false"
-        newFeature = "new feature"
         response = ubivar.NotifierSms.update("1", description=newDescription, 
-                                                 value=newValue, is_active=newStatus,
-                                                 feature=newFeature)
+                                                 value=newValue, is_active=newStatus)
         notifierSms = response.data[len(response.data) - 1]
         self.assertEqual(notifierSms["description"], newDescription)
         self.assertEqual(notifierSms["value"], newValue)
         self.assertEqual(notifierSms["is_active"], newStatus)
-        self.assertEqual(notifierSms["feature"], newFeature)
         self.assertEqual(response.object, "notifier_sms")
 
     def test_notifier_sms_delete(self):

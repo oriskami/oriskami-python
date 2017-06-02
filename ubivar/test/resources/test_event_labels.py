@@ -39,4 +39,3 @@ class UbivarAPIResourcesTests(UbivarTestCase):
     def test_event_label_list(self):
         response = ubivar.EventLabel.list()
         self.assertTrue(len(response.data) == 3)
-        print(response)

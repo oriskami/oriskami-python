@@ -6,7 +6,6 @@ from ubivar.test.helper import (UbivarTestCase, NOW)
 
 DUMMY_EMAIL = {
         "description": "DUMMY EMAIL",
-        "feature": "email_domain",
         "is_active": "true",
         "value": "abc@gmail.com"
         }
@@ -19,10 +18,15 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         notifierEmail = response.data[len(response.data)-1]
         self.assertTrue(hasattr(response, "data"))
         self.assertEqual(notifierEmail["description"], DUMMY_EMAIL["description"])
-        self.assertEqual(notifierEmail["feature"]    , DUMMY_EMAIL["feature"])
         self.assertEqual(notifierEmail["value"]      , DUMMY_EMAIL["value"])
         self.assertEqual(notifierEmail["is_active"]  , DUMMY_EMAIL["is_active"])
         self.assertEqual(response.object, "notifier_emails")
+
+    def test_notifier_email_retrieve(self):
+        response = ubivar.NotifierEmail.retrieve("0")
+        self.assertTrue(hasattr(response.data, "__iter__"))
+        self.assertTrue(response.object == "notifier_emails")
+        self.assertTrue(len(response.data))
 
     def test_notifier_email_list(self):
         response = ubivar.NotifierEmail.list()
@@ -39,15 +43,12 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         newDescription = "new description"
         newValue = "new value"
         newStatus= "false"
-        newFeature = "new feature"
         response = ubivar.NotifierEmail.update("1", description=newDescription, 
-                                                 value=newValue, is_active=newStatus,
-                                                 feature=newFeature)
+                                                 value=newValue, is_active=newStatus)
         notifierEmail = response.data[len(response.data) - 1]
         self.assertEqual(notifierEmail["description"], newDescription)
         self.assertEqual(notifierEmail["value"], newValue)
         self.assertEqual(notifierEmail["is_active"], newStatus)
-        self.assertEqual(notifierEmail["feature"], newFeature)
         self.assertEqual(response.object, "notifier_emails")
 
     def test_notifier_email_delete(self):

@@ -6,9 +6,8 @@ from ubivar.test.helper import (UbivarTestCase, NOW)
 
 DUMMY_WEBHOOK = {
         "description": "DUMMY WEBHOOK",
-        "feature": "webhook_domain",
-        "is_active": "true",
-        "value": "http://a-webhook-url"
+        "value": "http://a-webhook-url",
+        "is_active": "true"
         }
 
 
@@ -19,7 +18,6 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         notifierWebhook = response.data[len(response.data)-1]
         self.assertTrue(hasattr(response, "data"))
         self.assertEqual(notifierWebhook["description"], DUMMY_WEBHOOK["description"])
-        self.assertEqual(notifierWebhook["feature"]    , DUMMY_WEBHOOK["feature"])
         self.assertEqual(notifierWebhook["value"]      , DUMMY_WEBHOOK["value"])
         self.assertEqual(notifierWebhook["is_active"]  , DUMMY_WEBHOOK["is_active"])
         self.assertEqual(response.object, "notifier_webhooks")
@@ -39,15 +37,12 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         newDescription = "new description"
         newValue = "new value"
         newStatus= "false"
-        newFeature = "new feature"
         response = ubivar.NotifierWebhook.update("1", description=newDescription, 
-                                                 value=newValue, is_active=newStatus,
-                                                 feature=newFeature)
+                                                 value=newValue, is_active=newStatus)
         notifierWebhook = response.data[len(response.data) - 1]
         self.assertEqual(notifierWebhook["description"], newDescription)
         self.assertEqual(notifierWebhook["value"], newValue)
         self.assertEqual(notifierWebhook["is_active"], newStatus)
-        self.assertEqual(notifierWebhook["feature"], newFeature)
         self.assertEqual(response.object, "notifier_webhooks")
 
     def test_notifier_webhook_delete(self):
