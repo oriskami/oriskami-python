@@ -9,4 +9,4 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         response = ubivar.EventLastId.list()
         self.assertEqual(len(response.data), 1)
         lastId = response.data[0]["id"]
-        self.assertEqual(lastId, 3)
+        self.assertEqual(str(lastId), str(3))
