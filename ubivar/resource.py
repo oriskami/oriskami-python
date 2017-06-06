@@ -493,7 +493,8 @@ class FilterRulesBase(UpdatableAPIResource, ListableAPIResource):
         return 'filter_rules_base'
 
 
-class FilterRulesAI(UpdatableAPIResource, ListableAPIResource):
+class FilterRulesAI(UpdatableAPIResource, DeletableAPIResource, 
+                    ListableAPIResource):
 
     @classmethod
     def class_name(cls):
