@@ -43,4 +43,4 @@ class UbivarAPIResourcesTests(UbivarTestCase):
 
     def test_event_queue_list(self):
         response = ubivar.EventQueue.list()
-        self.assertTrue(len(response.data) == 3)
+        self.assertTrue(len(response.data) == 2)

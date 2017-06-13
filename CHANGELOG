@@ -1,0 +1,6 @@
+0.9.0 June 13, 2017
+ - Add Router resources: Router, RouterParameter, RouterData, RouterFlow, RouterFlowBackup
+ - Add functional tests for these resources
+ - Convert id function args to string when making instance_url
+ - Pop api_key from **params 
+ - Update README

@@ -6,18 +6,26 @@ from ubivar import api_requestor, error, util
 
 def convert_to_ubivar_object(resp, api_key):
     types = {
+            'router': Router,
+            'router_parameters': RouterParameter,
+            'router_data': RouterData,
+            'router_flows': RouterFlow,
+            'router_flow_backups': RouterFlowBackup,
+            'router_tests': RouterTest,
             'events': Event,
             'event_labels': EventLabel,
             'event_notifications': EventNotification,
             'event_queues': EventQueue,
             'event_reviews': EventReview,
             'event_last_id': EventLastId,
+            'filters': Filters,
             'filter_whitelists': FilterWhitelist,
             'filter_blacklists': FilterBlacklist,
             'filter_rules_custom': FilterRulesCustom,
             'filter_rules_base': FilterRulesBase,
             'filter_rules_ai': FilterRulesAI,
             'filter_scorings_dedicated': FilterScoringsDedicated,
+            'notifiers': Notifiers,
             'notifier_emails': NotifierEmail,
             'notifier_sms': NotifierSms,
             'notifier_ecommerce': NotifierECommerce,
@@ -304,7 +312,7 @@ class APIResource(UbivarObject):
                 'has invalid ID: %r' % (type(self).__name__, id), 'id')
         id = util.utf8(id)
         base = self.class_url()
-        extn = urllib.parse.quote_plus(id)
+        extn = urllib.parse.quote_plus(str(id))
         return "%s/%s" % (base, extn)
 
 
@@ -371,7 +379,8 @@ class ListableAPIResource(APIResource):
         return cls.list(*args, **params).auto_paging_iter()
 
     @classmethod
-    def list(cls, api_key=None, **params):
+    def list(cls, **params):
+        api_key = params.pop("api_key", None)
         requestor = api_requestor.APIRequestor(api_key,
                                                api_base=cls.api_base())
         url = cls.class_url()
@@ -384,7 +393,8 @@ class ListableAPIResource(APIResource):
 class CreatableAPIResource(APIResource):
 
     @classmethod
-    def create(cls, api_key=None, **params):
+    def create(cls, **params):
+        api_key = params.pop("api_key", None)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url()
         response, api_key = requestor.request('post', url, params)
@@ -394,9 +404,10 @@ class CreatableAPIResource(APIResource):
 class UpdatableAPIResource(APIResource):
 
     @classmethod
-    def update(cls, resource_id, api_key=None, **params):
+    def update(cls, resource_id, **params):
+        api_key = params.pop("api_key", None)
         requestor = api_requestor.APIRequestor(api_key)
-        url = cls.class_url() + "/" + resource_id
+        url = cls.class_url() + "/" + str(resource_id)
         response, api_key = requestor.request('post', url, params)
         return convert_to_ubivar_object(response, api_key)
 
@@ -404,9 +415,10 @@ class UpdatableAPIResource(APIResource):
 class DeletableAPIResource(APIResource):
 
     @classmethod
-    def delete(cls, resource_id, api_key=None, **params):
+    def delete(cls, resource_id, **params):
+        api_key = params.pop("api_key", None)
         requestor = api_requestor.APIRequestor(api_key)
-        url = cls.class_url() + "/" + resource_id
+        url = cls.class_url() + "/" + str(resource_id)
         response, api_key = requestor.request('delete', url, params)
         return convert_to_ubivar_object(response, api_key)
 
@@ -415,6 +427,48 @@ class DeletableAPIResource(APIResource):
 # API OBJECTS
 #
 #
+class Router(ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'router'
+
+
+class RouterParameter(UpdatableAPIResource, ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'router_parameters'
+
+
+class RouterData(UpdatableAPIResource, ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'router_data'
+
+
+class RouterFlow(CreatableAPIResource, UpdatableAPIResource, 
+                 DeletableAPIResource, ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'router_flows'
+
+
+class RouterFlowBackup(CreatableAPIResource, DeletableAPIResource,
+                       ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'router_flow_backups'
+
+
+class RouterTest(ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'router_tests'
 
 
 class Event(CreatableAPIResource, UpdatableAPIResource,
@@ -463,6 +517,13 @@ class EventLastId(ListableAPIResource):
         return 'event_last_id'
 
 
+class Filters(UpdatableAPIResource, ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'filters'
+
+
 class FilterWhitelist(CreatableAPIResource, UpdatableAPIResource,
                       DeletableAPIResource, ListableAPIResource):
 
@@ -507,6 +568,13 @@ class FilterScoringsDedicated(UpdatableAPIResource,
     @classmethod
     def class_name(cls):
         return 'filter_scorings_dedicated'
+
+
+class Notifiers(UpdatableAPIResource, ListableAPIResource):
+
+    @classmethod
+    def class_name(cls):
+        return 'notifiers'
 
 
 class NotifierEmail(CreatableAPIResource, UpdatableAPIResource,

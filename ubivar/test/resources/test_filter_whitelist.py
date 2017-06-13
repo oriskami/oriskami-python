@@ -19,9 +19,9 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         filterWhitelist = response.data[len(response.data)-1]
         self.assertTrue(hasattr(response, "data"))
         self.assertEqual(filterWhitelist["description"], DUMMY_WHITELIST["description"])
-        self.assertEqual(filterWhitelist["feature"]    , DUMMY_WHITELIST["feature"])
-        self.assertEqual(filterWhitelist["value"]      , DUMMY_WHITELIST["value"])
-        self.assertEqual(filterWhitelist["is_active"]  , DUMMY_WHITELIST["is_active"])
+        self.assertEqual(filterWhitelist["feature"], DUMMY_WHITELIST["feature"])
+        self.assertEqual(filterWhitelist["value"], DUMMY_WHITELIST["value"])
+        self.assertEqual(filterWhitelist["is_active"], DUMMY_WHITELIST["is_active"])
         self.assertEqual(response.object, "filter_whitelists")
 
     def test_filter_whitelist_list(self):
@@ -43,7 +43,7 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         response = ubivar.FilterWhitelist.update("1", description=newDescription, 
                                                  value=newValue, is_active=newStatus,
                                                  feature=newFeature)
-        filterWhitelist = response.data[len(response.data) - 1]
+        filterWhitelist = response.data[1]
         self.assertEqual(filterWhitelist["description"], newDescription)
         self.assertEqual(filterWhitelist["value"], newValue)
         self.assertEqual(filterWhitelist["is_active"], newStatus)

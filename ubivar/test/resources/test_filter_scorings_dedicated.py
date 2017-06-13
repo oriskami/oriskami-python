@@ -18,9 +18,6 @@ class UbivarAPIResourcesTests(UbivarTestCase):
         self.assertTrue(response.object == "filter_scorings_dedicated")
 
     def test_filter_scorings_dedicated_update(self):
-        response = ubivar.FilterScoringsDedicated.list()
-        originalScoringsDedicated = response.data[0]
-
         response = ubivar.FilterScoringsDedicated.update("0", **DUMMY_DEDICATED_SCORINGS)
         filterScoringsDedicated = response.data[0]
         self.assertEqual(filterScoringsDedicated["score_id"] , DUMMY_DEDICATED_SCORINGS["score_id"])

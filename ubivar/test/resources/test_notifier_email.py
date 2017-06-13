@@ -24,6 +24,7 @@ class UbivarAPIResourcesTests(UbivarTestCase):
 
     def test_notifier_email_retrieve(self):
         response = ubivar.NotifierEmail.retrieve("0")
+        print(response)
         self.assertTrue(hasattr(response.data, "__iter__"))
         self.assertTrue(response.object == "notifier_emails")
         self.assertTrue(len(response.data))
