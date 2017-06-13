@@ -5,11 +5,6 @@ from ubivar.test.helper import (UbivarTestCase)
 
 class UbivarAPIResourcesTests(UbivarTestCase):
 
-    def test_router_data_retrieve(self):
-        response = ubivar.RouterData.retrieve("0")
-        self.assertTrue(hasattr(response.data, "__iter__"))
-        self.assertTrue(hasattr(response.data, "is_active"))
-
     def test_router_data_update(self):
         response = ubivar.RouterData.update("0", is_active="true")
         self.assertTrue(hasattr(response.data, "__iter__"))
